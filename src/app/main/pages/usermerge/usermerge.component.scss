@@ -1,0 +1,52 @@
+.success{
+    border-color: #004f8e  ;
+    color: #004f8e ;
+}
+
+.cancel{
+    border-color: #FF6361 ;
+    color: #FF6361;
+}
+
+
+button{
+    border-radius: 10px;
+}
+
+input{
+    border-width: thin;
+}
+
+.text_field{
+    margin-top: 20px;
+}
+
+.input_field{
+    padding: 5px;
+    padding-left: 10px;
+}
+.bg-blue {
+    background-color: #004f8e ;
+  }
+  .shadow-custom {
+    border: black;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px black;
+
+  }
+
+  input {
+    // border-width: thin;
+    background-color: #e4e9eb;
+  }
+  
+  textarea {
+    background-color: #e4e9eb;
+  }
+  
+  .title-border-radius{
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px black;
+  
+  
+  }

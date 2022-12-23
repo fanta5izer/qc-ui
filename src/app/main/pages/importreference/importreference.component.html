@@ -1,0 +1,125 @@
+<div class="d-flex flex-column h-100">
+  <div class="m-4 align-items-center">
+    <div class="d-flex gap-3 justify-content-end">
+      <div class="flex-grow-1">
+        <h5>Import Reference</h5>
+      </div>
+      <!-- <div class="col-3">
+        <ng-select
+          name="type"
+          id="employeeMergeContactPersonInput"
+          #type="ngModel"
+          aria-describedby="type"
+          required
+          [items]="refrencetypeList"
+          bindLabel="displaytext"
+          bindValue="displaytext"
+          [(ngModel)]="referenceList.type"
+        ></ng-select>
+      </div> -->
+      <div class="col-3">
+        <input
+          class="form-control ml-3"
+          type="file"
+          accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          (change)="onFileChange($event)"
+          accept=".xlsx, .xls, .csv"
+          id="contact-list-sheet"
+          #myFileInput
+          name="myfile"
+        />
+      </div>
+
+      <div>
+        <button
+          mat-mini-fab
+          data-toggle="tooltip"
+          [title]="'Reset'"
+          id="ContactResetButton"
+          (click)="myFileInput.value = ''; onClickReset()"
+          [disabled]="importReferenceListSheet.length == 0"
+          class="cancelbtn mx-3 px-3"
+        >
+          <span class="material-icons">Reset</span>
+        </button>
+      </div>
+      <div>
+        <button
+          *ngIf="importReferenceList_dataset.length > 0"
+          class="createbtn px-2 border"
+          aria-hidden="true"
+          data-toggle="tooltip"
+          [title]="'Upload'"
+          (click)="uploadReference()"
+        >
+          <span class="fa fa-download" id="importsource"> </span>
+        </button>
+      </div>
+    </div>
+    <!-- <ng-select
+      class="col-3"
+      name="type"
+      id="employeeMergeContactPersonInput"
+      #type="ngModel"
+      aria-describedby="type"
+      required
+      [items]="refrencetypeList"
+      bindLabel="displaytext"
+      bindValue="displaytext"
+      [(ngModel)]="referenceList.type"
+    ></ng-select>
+    <div class="col-3">
+      <input
+        class="form-control ml-3"
+        type="file"
+        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        (change)="onFileChange($event)"
+        accept=".xlsx, .xls, .csv"
+        id="contact-list-sheet"
+        #myFileInput
+        name="myfile"
+      />
+    </div>
+    <div>
+      <button
+        mat-mini-fab
+        data-toggle="tooltip"
+        [title]="'Reset'"
+        id="ContactResetButton"
+        (click)="myFileInput.value = ''; onClickReset()"
+        [disabled]="importReferenceListSheet.length == 0"
+        class="cancelbtn mx-3 px-3"
+      >
+        <span class="material-icons">Reset</span>
+      </button>
+    </div>
+    <div>
+      <button
+        class="createbtn px-2 border"
+        [disabled]="selected_source.length == 0"
+        aria-hidden="true"
+        data-toggle="tooltip"
+        [title]="'Upload Source'"
+      >
+        <span class="fa fa-download" id="importsource"> </span>
+      </button>
+    </div> -->
+  </div>
+  <div id="source-container" class="flex-grow-1 mx-3 mt-3">
+    <angular-slickgrid
+      gridId="Sourcegrid"
+      [columnDefinitions]="importReferenceList_columnDefinitions"
+      [gridOptions]="importReferenceList_gridOptions"
+      [dataset]="importReferenceList_dataset"
+      (onSelectedRowsChanged)="handleSelectedRowsChanged($event)"
+      (sgOnCellChange)="
+        onImportSourceListGridCellChanged(
+          $event.detail.eventData,
+          $event.detail.args
+        )
+      "
+      (onAngularGridCreated)="ImportSourceListGridReady($event.detail)"
+    >
+    </angular-slickgrid>
+  </div>
+</div>

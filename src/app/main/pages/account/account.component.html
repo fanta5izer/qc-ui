@@ -1,0 +1,182 @@
+<form
+  #AccountForm="ngForm"
+  class="h-100 d-flex flex-column pt-1"
+  (ngSubmit)="AccountForm.form.valid && save(AccountForm)"
+>
+  <div class="bg-blue py-1">
+    <div class="col-12">
+      <div
+        class="col-lg-12 d-flex flex-row px-2 align-items-center border-bottom border-primary shadow-custom bg-white"
+      >
+        <p class="ps-3 h5 fw-bold">
+          {{ "Account" | translate }}
+        </p>
+
+        <button
+          mat-mini-fab
+          data-toggle="tooltip"
+          type="submit"
+          [title]="'GLOBAL.SAVE' | translate"
+          id="ContactSaveButton"
+          class="m-3 ms-auto align-items-center px-4"
+          [disabled]="!AccountForm.dirty"
+          [ngClass]="!AccountForm.dirty ? 'disablebtn' : 'savebtn'"
+        >
+          {{ "GLOBAL.SAVE" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="bg-blue flex-grow-1 pt-1 pb-2" style="height: 0px">
+    <div class="bg-white shadow-custom h-100 overflow-auto">
+      <div
+        class="row p-1 mx-3 m-3 d-flex align-items-start justify-content-start"
+      >
+        <div class="col-lg-4 col-xl-4 col-md-12 col-sm-12 col-xs-12 px-1 py-1">
+          <div class="pt-1">
+            <div
+              class="title-border-radius fw-bold py-1 mb-1 ps-3 text-white"
+              style="background-color: #004f8e"
+            >
+              {{ "Account Information" | translate }}
+            </div>
+          </div>
+
+          <!-- <div *ngIf="hideAccounts"> -->
+          <div class="py-1" *ngIf="superAdmin">
+            <label
+              class="customfont mat-body-strong fw-bold pb-1 ps-2"
+              style="color: #004f8e"
+              >{{ "USERMERGE.ROLE" | translate }}
+            </label>
+            <input
+              style="color: aliceblue; background-color: #004f8e"
+              disabled="superAdmin"
+              name="rolename"
+              class="form-control"
+              id="employeeMergeRoleInput"
+              #role="ngModel"
+              aria-describedby="rolenmae"
+              required
+              [ngClass]="{
+                'is-invalid': AccountForm.submitted && role.invalid
+              }"
+              [(ngModel)]="user.role"
+            />
+          </div>
+
+          <div class="py-1">
+            <label
+              class="customfont mat-body-strong fw-bold pb-1 ps-2"
+              style="color: #004f8e"
+              >{{ "USERMERGE.USERNAME" | translate }}
+            </label>
+            <input
+              name="username"
+              class="form-control"
+              id="employeeMergeUserNameInput"
+              #username="ngModel"
+              aria-describedby="username"
+              [ngClass]="{
+                'is-invalid': AccountForm.submitted && username.invalid
+              }"
+              [(ngModel)]="user.username"
+            />
+
+            <div
+              class="invalid-feedback"
+              *ngIf="AccountForm.submitted && username.invalid"
+            >
+              <p style="color: red" *ngIf="username.errors.required">
+                User name is required
+              </p>
+            </div>
+          </div>
+
+          <div class="py-1">
+            <label
+              class="customfont mat-body-strong fw-bold pb-1 ps-2"
+              style="color: #004f8e"
+              >{{ "ACCOUNT.EMAIL" | translate }}</label
+            >
+            <input
+              name="email"
+              readonly="true"
+              class="form-control"
+              id="employeeMergeemailInput"
+              #email="ngModel"
+              aria-describedby="email"
+              required
+              [ngClass]="{
+                'is-invalid': AccountForm.submitted && email.invalid
+              }"
+              [(ngModel)]="user.email"
+              [customValidator]="validator_service.email"
+            />
+
+            <div
+              class="invalid-feedback"
+              *ngIf="AccountForm.submitted && email.invalid"
+            >
+              <p style="color: red" *ngIf="email.errors.required">
+                Email is required
+              </p>
+            </div>
+          </div>
+          <div class="col py-1" *ngIf="!superAdmin">
+            <label
+              class="customfont mat-body-strong fw-bold pb-1"
+              style="color: #004f8e"
+              >{{ "EMPLOYEEMERGE.ROLE" | translate }}
+            </label>
+
+            <ng-select
+              name="role"
+              id="userroleselection"
+              #role="ngModel"
+              aria-describedby="role"
+              [items]="roleList"
+              bindLabel="name"
+              bindValue="id"
+              [(ngModel)]="user.roleid"
+            ></ng-select>
+          </div>
+
+          <div class="row">
+            <div class="col py-1">
+              <label
+                class="customfont mat-body-strong fw-bold pb-1 ps-2"
+                style="color: #004f8e"
+                >{{ "ACCOUNT.MOBILE" | translate }}</label
+              >
+              <input
+                name="mobile"
+                class="form-control"
+                id="employeeMergemobileInput"
+                #mobile="ngModel"
+                aria-describedby="mobile"
+                required
+                [ngClass]="{
+                  'is-invalid': AccountForm.submitted && mobile.invalid
+                }"
+                [(ngModel)]="user.mobile"
+                [customValidator]="validator_service.mobileNumber"
+              />
+
+              <div
+                class="invalid-feedback"
+                *ngIf="AccountForm.submitted && mobile.invalid"
+              >
+                <p style="color: red" *ngIf="mobile.errors.required">
+                  Mobile is required
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,1051 @@
+<!-- 
+<form
+  #userMergeForm="ngForm"
+  class="h-100 d-flex flex-column"
+  (ngSubmit)="userMergeForm.form.valid && onSaveuser(userMergeForm)"
+>
+  <div class="bg-blue">
+    <div
+      class="ps-3 m-1 d-flex flex-row align-items-center border-bottom border-primary shadow-custom mx-3 bg-white"
+    >
+      <p class="ps-3 h5 fw-bold" *ngIf="!isedit">
+        {{ "USERMERGE.CREATE_USER" | translate }}
+      </p>
+      <p class="ps-3 h5 fw-bold" *ngIf="isedit">
+        {{ "USERMERGE.EDIT_USER" | translate }}
+      </p>
+      <button
+        mat-mini-fab
+        data-toggle="tooltip"
+        (ngSubmit)="userMergeForm.form.valid && onSaveuser(userMergeForm)"
+        [title]="'GLOBAL.SAVE' | translate"
+        id="ContactSaveButton"
+        class="savebtn m-3 ms-auto align-items-center px-4"
+      >
+        {{ "GLOBAL.SAVE" | translate }}
+      </button>
+      <button
+        mat-mini-fab
+        data-toggle="tooltip"
+        (click)="onClickCancel()"
+        [title]="'GLOBAL.CANCEL' | translate"
+        id="ContactCancelButton"
+        class="cancelbtn me-3 align-items-center px-4"
+      >
+        {{ "GLOBAL.CANCEL" | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="bg-blue flex-grow-1 px-3 pt-1 pb-3" style="height: 0px">
+    <div class="bg-white shadow-custom h-100 overflow-auto">
+      <div class="row no-gutters p-1 m-3">
+        <div class="col d-flex align-items-start justify-content-center">
+          <div class="col-md-12 pb-2">
+            <div class="pb-2">
+              <label
+                class="mat-body-strong fw-bold py-1 ps-2"
+                style="color: #004f8e "
+                >{{ "USERMERGE.FIRSTNAME" | translate }}</label
+              >
+              <input
+                name="firstname"
+                class="form-control"
+                id="employeeMergeFirstInput"
+                #firstname="ngModel"
+                aria-describedby="name"
+                required
+                [ngClass]="{
+                  'is-invalid': userMergeForm.submitted && firstname.invalid
+                }"
+                [(ngModel)]="user.firstname"
+                [customValidator]="validator_service.emptyString"
+              />
+
+              <div
+                class="invalid-feedback"
+                *ngIf="userMergeForm.submitted && firstname.invalid"
+              >
+                <p style="color: red" *ngIf="firstname.errors.required">
+                  First name is required
+                </p>
+              </div>
+            </div>
+
+            <div class="pb-2">
+              <label
+                class="mat-body-strong fw-bold py-1 ps-2"
+                style="color: #004f8e "
+                >{{ "USERMERGE.LASTNAME" | translate }}</label
+              >
+              <input
+                name="lastname"
+                class="form-control"
+                id="employeeMergeLastNameInput"
+                #lastname="ngModel"
+                aria-describedby="lastname"
+                required
+                [ngClass]="{
+                  'is-invalid': userMergeForm.submitted && lastname.invalid
+                }"
+                [(ngModel)]="user.lastname"
+                [customValidator]="validator_service.emptyString"
+              />
+
+              <div
+                class="invalid-feedback"
+                *ngIf="userMergeForm.submitted && lastname.invalid"
+              >
+                <p style="color: red" *ngIf="lastname.errors.required">
+                  Last name is required
+                </p>
+              </div>
+            </div>
+
+            <div class="pb-2">
+              <label
+                class="mat-body-strong fw-bold py-1 ps-2"
+                style="color: #004f8e "
+                >{{ "USERMERGE.USERNAME" | translate }}</label
+              >
+              <input
+                name="username"
+                class="form-control"
+                id="employeeMergeUserNameInput"
+                #username="ngModel"
+                aria-describedby="username"
+                required
+                [ngClass]="{
+                  'is-invalid': userMergeForm.submitted && username.invalid
+                }"
+                [(ngModel)]="user.username"
+                [customValidator]="validator_service.emptyString"
+              />
+
+              <div
+                class="invalid-feedback"
+                *ngIf="userMergeForm.submitted && username.invalid"
+              >
+                <p style="color: red" *ngIf="username.errors.required">
+                  User name is required
+                </p>
+              </div>
+            </div>
+
+            <div class="pb-2">
+              <label
+                class="mat-body-strong fw-bold py-1 ps-2"
+                style="color: #004f8e "
+                >{{ "USERMERGE.ROLE" | translate }}</label
+              >
+              <input
+                [disabled]="superadmin"
+                name="role"
+                class="form-control"
+                id="employeeMergeRoleInput"
+                #role="ngModel"
+                aria-describedby="role"
+                required
+                [ngClass]="{
+                  'is-invalid': userMergeForm.submitted && role.invalid
+                }"
+                [(ngModel)]="user.role"
+                [customValidator]="validator_service.userRole"
+              />
+
+              <div
+                class="invalid-feedback"
+                *ngIf="userMergeForm.submitted && role.invalid"
+              >
+                <p style="color: red" *ngIf="role.invalid">
+                  User Role '{{ user.role }}' already exist
+                </p>
+              </div>
+            </div>
+
+            <div class="pb-2">
+              <label
+                class="mat-body-strong fw-bold py-1 ps-2"
+                style="color: #004f8e "
+                >{{ "CONTACTMERGE.EMAIL" | translate }}</label
+              >
+              <input
+                name="email"
+                class="form-control"
+                id="employeeMergeEmailInput"
+                #email="ngModel"
+                aria-describedby="email"
+                required
+                [ngClass]="{
+                  'is-invalid': userMergeForm.submitted && email.invalid
+                }"
+                [(ngModel)]="user.email"
+                [customValidator]="validator_service.email"
+              />
+
+              <div
+                class="invalid-feedback"
+                *ngIf="userMergeForm.submitted && email.invalid"
+              >
+                <p style="color: red" *ngIf="email.errors.required">
+                  Email is required
+                </p>
+              </div>
+            </div>
+
+            <div class="pb-2">
+              <label
+                class="mat-body-strong fw-bold py-1 ps-2"
+                style="color: #004f8e "
+                >{{ "CONTACTMERGE.MOBILE" | translate }}</label
+              >
+              <input
+                name="mobile"
+                class="form-control"
+                id="employeeMergeMobileInput"
+                #mobile="ngModel"
+                aria-describedby="mobile"
+                required
+                [ngClass]="{
+                  'is-invalid': userMergeForm.submitted && mobile.invalid
+                }"
+                [(ngModel)]="user.mobile"
+                maxlength="10"
+                [customValidator]="validator_service.mobileNumber"
+              />
+
+              <div
+                class="invalid-feedback"
+                *ngIf="userMergeForm.submitted && mobile.invalid"
+              >
+                <p style="color: red" *ngIf="mobile.errors.required">
+                  Mobile number is required
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col d-flex align-items-start justify-content-center">
+          <div class="col-md-12 pb-2">
+            <div class="pb-2">
+              <label
+                class="mat-body-strong fw-bold py-1 ps-2"
+                style="color: #004f8e "
+                >{{ "USERMERGE.PASSWORD" | translate }}</label
+              >
+              <div class="input-group">
+                <input
+                  name="password"
+                  [type]="hide_password ? 'password' : 'text'"
+                  data-toggle="password"
+                  class="form-control"
+                  id="employeeMergePasswordInput"
+                  #password="ngModel"
+                  aria-describedby="password"
+                  required
+                  [ngClass]="{
+                    'is-invalid': userMergeForm.submitted && password.invalid
+                  }"
+                  [(ngModel)]="user.password"
+                />
+                <span
+                  class="hide-password-icon input-group-text"
+                  id="basic-addon1"
+                  ><i
+                    *ngIf="hide_password"
+                    [ngClass]="{ 'highlight-password-icon': !hide_password }"
+                    class="fa fa-eye-slash"
+                    id="show_eye_one"
+                    (mouseup)="showPassword(false)"
+                    (mousedown)="showPassword(true)"
+                    aria-hidden="true"
+                    style="color: #004f8e "
+                  ></i>
+
+                  <i
+                    *ngIf="!hide_password"
+                    [ngClass]="{ 'highlight-password-icon': !hide_password }"
+                    class="fa fa-eye fa-xs"
+                    id="show_eye_one"
+                    (mouseup)="showPassword(false)"
+                    (mousedown)="showPassword(true)"
+                    aria-hidden="true"
+                    style="color: #004f8e "
+                  ></i>
+                </span>
+
+                <div *ngIf="user.password != confirm_password"></div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="userMergeForm.submitted && password.invalid"
+                >
+                  <p style="color: red" *ngIf="password.errors.required">
+                    Password is required
+                  </p>
+                </div>
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    userMergeForm.submitted && password.hasError('mismatch')
+                  "
+                >
+                  <p style="color: red">Password mismatch</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pb-2">
+              <label
+                class="mat-body-strong fw-bold py-1 ps-2"
+                style="color: #004f8e "
+                >{{ "USERMERGE.CONFIRM" | translate }}</label
+              >
+              <div class="input-group">
+                <input
+                  name="confirmPassword"
+                  [type]="hide_confirm_password ? 'password' : 'text'"
+                  class="form-control"
+                  id="employeeMergeConfirmPasswordInput"
+                  #confirmPassword="ngModel"
+                  aria-describedby="confirmPassword"
+                  required
+                  [ngClass]="{
+                    'is-invalid':
+                      userMergeForm.submitted && confirmPassword.invalid
+                  }"
+                  [(ngModel)]="confirm_password"
+                  [customValidator]="validator_service.formConfirmPassword"
+                />
+                <span
+                  class="hide-password-icon input-group-text"
+                  id="basic-addon2"
+                  ><i
+                    *ngIf="hide_confirm_password"
+                    [ngClass]="{
+                      'highlight-password-icon': !hide_confirm_password
+                    }"
+                    class="fa fa-eye-slash"
+                    id="show_eye_one"
+                    (mouseup)="showConfirmPassword(false)"
+                    (mousedown)="showConfirmPassword(true)"
+                    aria-hidden="true"
+                    style="color: #004f8e "
+                  ></i>
+
+                  <i
+                    *ngIf="!hide_confirm_password"
+                    [ngClass]="{
+                      'highlight-password-icon': !hide_confirm_password
+                    }"
+                    class="fa fa-eye fa-xs"
+                    id="show_eye_two"
+                    (mouseup)="showConfirmPassword(false)"
+                    (mousedown)="showConfirmPassword(true)"
+                    aria-hidden="true"
+                    style="color: #004f8e "
+                  ></i
+                ></span>
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="userMergeForm.submitted && confirmPassword.invalid"
+                >
+                  <p style="color: red" *ngIf="confirmPassword.errors.required">
+                    Confirm password is required
+                  </p>
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    userMergeForm.submitted &&
+                    confirmPassword.hasError('mismatch')
+                  "
+                >
+                  <p
+                    style="color: red"
+                    *ngIf="
+                      confirmPassword.hasError('mismatch') &&
+                      confirm_password != ''
+                    "
+                  >
+                    Password mismatch
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col d-flex align-items-start justify-content-center"></div>
+      </div>
+    
+        <div class="row no-gutters p-3">
+          <div class="col-md-12 pb-2">
+            <label
+              class="mat-body-strong fw-bold py-1 ps-2"
+              style="color: #004f8e "
+              >{{ "USERMERGE.FIRSTNAME" | translate }}</label
+            >
+            <input
+              name="firstname"
+              class="form-control"
+              id="employeeMergeFirstInput"
+              #firstname="ngModel"
+              aria-describedby="name"
+              required
+              [ngClass]="{
+                'is-invalid': userMergeForm.submitted && firstname.invalid
+              }"
+              [(ngModel)]="user.firstname"
+              [customValidator]="validator_service.emptyString"
+            />
+
+            <div
+              class="invalid-feedback"
+              *ngIf="userMergeForm.submitted && firstname.invalid"
+            >
+              <p style="color: red" *ngIf="firstname.errors.required">
+                First name is required
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-12 pb-2">
+            <label
+              class="mat-body-strong fw-bold py-1 ps-2"
+              style="color: #004f8e "
+              >{{ "USERMERGE.LASTNAME" | translate }}</label
+            >
+            <input
+              name="lastname"
+              class="form-control"
+              id="employeeMergeLastNameInput"
+              #lastname="ngModel"
+              aria-describedby="lastname"
+              required
+              [ngClass]="{
+                'is-invalid': userMergeForm.submitted && lastname.invalid
+              }"
+              [(ngModel)]="user.lastname"
+              [customValidator]="validator_service.emptyString"
+            />
+
+            <div
+              class="invalid-feedback"
+              *ngIf="userMergeForm.submitted && lastname.invalid"
+            >
+              <p style="color: red" *ngIf="lastname.errors.required">
+                Last name is required
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-12 pb-2">
+            <label
+              class="mat-body-strong fw-bold py-1 ps-2"
+              style="color: #004f8e "
+              >{{ "USERMERGE.USERNAME" | translate }}</label
+            >
+            <input
+              name="username"
+              class="form-control"
+              id="employeeMergeUserNameInput"
+              #username="ngModel"
+              aria-describedby="username"
+              required
+              [ngClass]="{
+                'is-invalid': userMergeForm.submitted && username.invalid
+              }"
+              [(ngModel)]="user.username"
+              [customValidator]="validator_service.emptyString"
+            />
+
+            <div
+              class="invalid-feedback"
+              *ngIf="userMergeForm.submitted && username.invalid"
+            >
+              <p style="color: red" *ngIf="username.errors.required">
+                User name is required
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-12 pb-2">
+            <label
+              class="mat-body-strong fw-bold py-1 ps-2"
+              style="color: #004f8e "
+              >{{ "USERMERGE.ROLE" | translate }}</label
+            >
+            <input
+              name="role"
+              class="form-control"
+              id="employeeMergeRoleInput"
+              #role="ngModel"
+              aria-describedby="role"
+              required
+              [ngClass]="{
+                'is-invalid': userMergeForm.submitted && role.invalid
+              }"
+              [(ngModel)]="user.role"
+              [customValidator]="validator_service.emptyString"
+            />
+
+            <div
+              class="invalid-feedback"
+              *ngIf="userMergeForm.submitted && role.invalid"
+            >
+              <p style="color: red" *ngIf="role.errors.required">
+                User name is required
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-12 pb-2">
+            <label
+              class="mat-body-strong fw-bold py-1 ps-2"
+              style="color: #004f8e "
+              >{{ "CONTACTMERGE.EMAIL" | translate }}</label
+            >
+            <input
+              name="email"
+              class="form-control"
+              id="employeeMergeEmailInput"
+              #email="ngModel"
+              aria-describedby="email"
+              required
+              [ngClass]="{
+                'is-invalid': userMergeForm.submitted && email.invalid
+              }"
+              [(ngModel)]="user.email"
+              [customValidator]="validator_service.email"
+            />
+
+            <div
+              class="invalid-feedback"
+              *ngIf="userMergeForm.submitted && email.invalid"
+            >
+              <p style="color: red" *ngIf="email.errors.required">
+                Email is required
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-12 pb-2">
+            <label
+              class="mat-body-strong fw-bold py-1 ps-2"
+              style="color: #004f8e "
+              >{{ "CONTACTMERGE.MOBILE" | translate }}</label
+            >
+            <input
+              name="mobile"
+              class="form-control"
+              id="employeeMergeMobileInput"
+              #mobile="ngModel"
+              aria-describedby="mobile"
+              required
+              [ngClass]="{
+                'is-invalid': userMergeForm.submitted && mobile.invalid
+              }"
+              [(ngModel)]="user.mobile"
+              maxlength="10"
+              [customValidator]="validator_service.mobileNumber"
+            />
+
+            <div
+              class="invalid-feedback"
+              *ngIf="userMergeForm.submitted && mobile.invalid"
+            >
+              <p style="color: red" *ngIf="mobile.errors.required">
+                Mobile number is required
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-12 pb-2">
+            <label
+              class="mat-body-strong fw-bold py-1 ps-2"
+              style="color: #004f8e "
+              >{{ "CONTACTMERGE.PASSWORD" | translate }}</label
+            >
+            <input
+              name="password"
+              class="form-control"
+              id="employeeMergePasswordInput"
+              #password="ngModel"
+              aria-describedby="password"
+              required
+              [ngClass]="{
+                'is-invalid': userMergeForm.submitted && password.invalid
+              }"
+              [(ngModel)]="user.password"
+              [customValidator]="validator_service.formConfirmPassword"
+            />
+
+            <div
+              class="invalid-feedback"
+              *ngIf="userMergeForm.submitted && password.invalid"
+            >
+              <p style="color: red" *ngIf="password.errors.required">
+                Password is required
+              </p>
+            </div>
+
+            <div
+              class="invalid-feedback"
+              *ngIf="userMergeForm.submitted && password.hasError('mismatch')"
+            >
+              <p style="color: red">Password mismatch</p>
+            </div>
+          </div>
+
+          <div class="col-md-12 pb-2">
+            <label
+              class="mat-body-strong fw-bold py-1 ps-2"
+              style="color: #004f8e "
+              >{{ "CONTACTMERGE.CONFIRMPASSWORD" | translate }}</label
+            >
+            <input
+              name="confirmPassword"
+              class="form-control"
+              id="employeeMergeConfirmPasswordInput"
+              #confirmPassword="ngModel"
+              aria-describedby="confirmPassword"
+              required
+              [ngClass]="{
+                'is-invalid': userMergeForm.submitted && confirmPassword.invalid
+              }"
+              [(ngModel)]="confirm_password"
+              [customValidator]="validator_service.formConfirmPassword"
+            />
+
+            <div
+              class="invalid-feedback"
+              *ngIf="userMergeForm.submitted && confirmPassword.invalid"
+            >
+              <p style="color: red" *ngIf="confirmPassword.errors.required">
+                Mobile number is required
+              </p>
+            </div>
+
+            <div
+            class="invalid-feedback"
+            *ngIf="userMergeForm.submitted && confirmPassword.hasError('mismatch')"
+          >
+            <p style="color: red" *ngIf="confirmPassword.hasError('mismatch') && confirm_password != ''">
+              Password mismatch
+            </p>
+          </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+  
+</form> -->
+
+<form
+  #userMergeForm="ngForm"
+  class="h-100 d-flex flex-column"
+  (ngSubmit)="userMergeForm.form.valid && onSaveuser(userMergeForm)"
+>
+  <div class="bg-blue px-3 py-1">
+    <div class="col-12">
+      <div
+        class="col-lg-12 d-flex flex-row px-2 align-items-center border-bottom border-primary shadow-custom bg-white"
+      >
+        <p *ngIf="!is_edit" class="ps-3 h5 fw-bold">
+          {{ "USERMERGE.CREATE_USER" | translate }}
+        </p>
+        <p *ngIf="is_edit" class="ps-3 h5 fw-bold">
+          {{ "USERMERGE.EDIT_USER" | translate }}
+        </p>
+        <button
+          mat-mini-fab
+          data-toggle="tooltip"
+          type="submit"
+          [title]="'GLOBAL.SAVE' | translate"
+          id="ContactSaveButton"
+          class="m-3 ms-auto align-items-center px-4"
+          [disabled]="!userMergeForm.dirty"
+          [ngClass]="!userMergeForm.dirty ? 'disablebtn' : 'savebtn'"
+        >
+          {{ "GLOBAL.SAVE" | translate }}
+        </button>
+        <button
+          mat-mini-fab
+          type="button"
+          data-toggle="tooltip"
+          (click)="onClickCancel(userMergeForm)"
+          [title]="'GLOBAL.CANCEL' | translate"
+          id="ContactCancelButton"
+          class="cancelbtn me-3 align-items-center px-4"
+        >
+          {{ "GLOBAL.CANCEL" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="bg-blue flex-grow-1 px-3 pt-1 pb-3" style="height: 0px">
+    <div class="bg-white shadow-custom h-100 overflow-auto">
+      <div
+        class="row p-1 mx-3 m-3 d-flex align-items-start justify-content-start"
+      >
+        <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12 px-1 py-1">
+          <div class="px-2 pt-1">
+            <div
+              class="title-border-radius fw-bold py-1 mb-1 ps-3 text-white"
+              style="background-color: #004f8e "
+            >
+              {{ "USERMERGE.USER_INFORMATION" | translate }}
+            </div>
+          </div>
+
+          <div class="row p-2">
+            <div class="col-xs-12 col-md-6">
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e "
+                  >{{ "USERMERGE.FIRSTNAME" | translate }}
+                  <span style="color: red">*</span></label
+                >
+                <input
+                  name="firstname"
+                  class="form-control"
+                  id="employeeMergeFirstInput"
+                  #firstname="ngModel"
+                  aria-describedby="name"
+                  required
+                  [ngClass]="{
+                    'is-invalid': userMergeForm.submitted && firstname.invalid
+                  }"
+                  [(ngModel)]="user.firstname"
+                  [customValidator]="validator_service.emptyString"
+                />
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="userMergeForm.submitted && firstname.invalid"
+                >
+                  <p style="color: red" *ngIf="firstname.errors.required">
+                    First name is required
+                  </p>
+                </div>
+
+                <div class="py-1">
+                  <label
+                    class="customfont mat-body-strong fw-bold pb-1"
+                    style="color: #004f8e "
+                    >{{ "USERMERGE.LASTNAME" | translate }}
+                    <span style="color: red">*</span></label
+                  >
+                  <input
+                    name="lastname"
+                    class="form-control"
+                    id="employeeMergeLastNameInput"
+                    #lastname="ngModel"
+                    aria-describedby="lastname"
+                    required
+                    [ngClass]="{
+                      'is-invalid': userMergeForm.submitted && lastname.invalid
+                    }"
+                    [(ngModel)]="user.lastname"
+                    [customValidator]="validator_service.emptyString"
+                  />
+
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="userMergeForm.submitted && lastname.invalid"
+                  >
+                    <p style="color: red" *ngIf="lastname.errors.required">
+                      Last name is required
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e "
+                  >{{ "USERMERGE.USERNAME" | translate }}
+                </label>
+                <input
+                  name="username"
+                  class="form-control"
+                  id="employeeMergeUserNameInput"
+                  #username="ngModel"
+                  aria-describedby="username"
+                  [ngClass]="{
+                    'is-invalid': userMergeForm.submitted && username.invalid
+                  }"
+                  [(ngModel)]="user.username"
+                />
+
+                <!-- <div
+                      class="invalid-feedback"
+                      *ngIf="userMergeForm.submitted && username.invalid"
+                    >
+                      <p style="color: red" *ngIf="username.errors.required">
+                        User name is required
+                      </p>
+                    </div> -->
+              </div>
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e "
+                  >{{ "USERMERGE.ROLE" | translate }}
+                  <span style="color: red">*</span></label
+                >
+                <input
+                  [disabled]="superadmin"
+                  name="role"
+                  class="form-control"
+                  id="employeeMergeRoleInput"
+                  #role="ngModel"
+                  aria-describedby="role"
+                  required
+                  [ngClass]="{
+                    'is-invalid': userMergeForm.submitted && role.invalid
+                  }"
+                  [(ngModel)]="user.role"
+                  [customValidator]="validator_service.userRole"
+                />
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="userMergeForm.submitted && role.invalid"
+                >
+                  <p style="color: red" *ngIf="role.invalid && user.role != ''">
+                    User Role '{{ user.role }}' already exist
+                  </p>
+                  <p style="color: red" *ngIf="role.errors.required">
+                    Role is required
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="py-1">
+                <label
+                  class="customfont at-body-strong fw-bold pb-1"
+                  style="color: #004f8e "
+                  >{{ "CONTACTMERGE.EMAIL" | translate }} <span style="color: red">*</span>
+                </label>
+                <input
+                  name="email"
+                  class="form-control"
+                  id="employeeMergeEmailInput"
+                  #email="ngModel"
+                  aria-describedby="email"
+                  required
+                  [ngClass]="{
+                    'is-invalid': userMergeForm.submitted && email.invalid
+                  }"
+                  [(ngModel)]="user.email"
+                  [customValidator]="validator_service.email"
+                />
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="userMergeForm.submitted && email.invalid"
+                >
+                  <p style="color: red" *ngIf="email.invalid && user.email != ''">
+                    Invalid Email format
+                  </p>
+                  <p style="color: red" *ngIf="email.errors.required">
+                    Email is required
+                  </p>
+                </div>
+              </div>
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e "
+                  >{{ "CONTACTMERGE.MOBILE" | translate }}
+                  <span style="color: red">*</span></label
+                >
+                <input
+                  name="mobile"
+                  class="form-control"
+                  id="employeeMergeMobileInput"
+                  #mobile="ngModel"
+                  aria-describedby="mobile"
+                  required
+                  [ngClass]="{
+                    'is-invalid': userMergeForm.submitted && mobile.invalid
+                  }"
+                  [(ngModel)]="user.mobile"
+                  maxlength="10"
+                  [customValidator]="validator_service.mobileNumber"
+                />
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="userMergeForm.submitted && mobile.invalid"
+                >
+                  <p style="color: red" *ngIf="mobile.errors.required">
+                    Mobile number is required
+                  </p>
+                </div>
+              </div>
+
+              <div *ngIf="!is_edit" class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e "
+                  >{{ "USERMERGE.PASSWORD" | translate }}
+                  <span style="color: red">*</span></label
+                >
+                <div class="input-group">
+                  <input
+                    name="password"
+                    [type]="hide_password ? 'password' : 'text'"
+                    data-toggle="password"
+                    class="form-control"
+                    id="employeeMergePasswordInput"
+                    #password="ngModel"
+                    aria-describedby="password"
+                    required
+                    [ngClass]="{
+                      'is-invalid': userMergeForm.submitted && password.invalid
+                    }"
+                    [(ngModel)]="user.password"
+                  />
+                  <span
+                    class="hide-password-icon input-group-text"
+                    id="basic-addon1"
+                    ><i
+                      *ngIf="hide_password"
+                      [ngClass]="{ 'highlight-password-icon': !hide_password }"
+                      class="fa fa-eye-slash"
+                      id="show_eye_one"
+                      (mouseup)="showPassword(false)"
+                      (mousedown)="showPassword(true)"
+                      aria-hidden="true"
+                      style="color: #004f8e "
+                    ></i>
+
+                    <i
+                      *ngIf="!hide_password"
+                      [ngClass]="{ 'highlight-password-icon': !hide_password }"
+                      class="fa fa-eye fa-xs"
+                      id="show_eye_one"
+                      (mouseup)="showPassword(false)"
+                      (mousedown)="showPassword(true)"
+                      aria-hidden="true"
+                      style="color: #004f8e "
+                    ></i>
+                  </span>
+
+                  <div *ngIf="user.password != confirm_password"></div>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="userMergeForm.submitted && password.invalid"
+                  >
+                    <p style="color: red" *ngIf="password.errors.required">
+                      Password is required
+                    </p>
+                  </div>
+
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      userMergeForm.submitted && password.hasError('mismatch')
+                    "
+                  >
+                    <p style="color: red">Password mismatch</p>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="!is_edit" class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e "
+                  >{{ "USERMERGE.CONFIRM" | translate }}
+                  <span style="color: red">*</span>
+                </label>
+                <div class="input-group">
+                  <input
+                    name="confirmPassword"
+                    [type]="hide_confirm_password ? 'password' : 'text'"
+                    class="form-control"
+                    id="employeeMergeConfirmPasswordInput"
+                    #confirmPassword="ngModel"
+                    aria-describedby="confirmPassword"
+                    required
+                    [ngClass]="{
+                      'is-invalid':
+                        userMergeForm.submitted && confirmPassword.invalid
+                    }"
+                    [(ngModel)]="confirm_password"
+                    [customValidator]="validator_service.formConfirmPassword"
+                  />
+                  <span
+                    class="hide-password-icon input-group-text"
+                    id="basic-addon2"
+                    ><i
+                      *ngIf="hide_confirm_password"
+                      [ngClass]="{
+                        'highlight-password-icon': !hide_confirm_password
+                      }"
+                      class="fa fa-eye-slash"
+                      id="show_eye_one"
+                      (mouseup)="showConfirmPassword(false)"
+                      (mousedown)="showConfirmPassword(true)"
+                      aria-hidden="true"
+                      style="color: #004f8e "
+                    ></i>
+
+                    <i
+                      *ngIf="!hide_confirm_password"
+                      [ngClass]="{
+                        'highlight-password-icon': !hide_confirm_password
+                      }"
+                      class="fa fa-eye fa-xs"
+                      id="show_eye_two"
+                      (mouseup)="showConfirmPassword(false)"
+                      (mousedown)="showConfirmPassword(true)"
+                      aria-hidden="true"
+                      style="color: #004f8e "
+                    ></i
+                  ></span>
+
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="userMergeForm.submitted && confirmPassword.invalid"
+                  >
+                    <p
+                      style="color: red"
+                      *ngIf="confirmPassword.errors.required"
+                    >
+                      Confirm password is required
+                    </p>
+                  </div>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      userMergeForm.submitted &&
+                      confirmPassword.hasError('mismatch')
+                    "
+                  >
+                    <p
+                      style="color: red"
+                      *ngIf="
+                        confirmPassword.hasError('mismatch') &&
+                        confirm_password != ''
+                      "
+                    >
+                      Password mismatch
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

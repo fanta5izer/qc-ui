@@ -1,0 +1,480 @@
+<!-- <div class="d-flex flex-row mh-100">
+  <div class="col-6">
+    <div>
+      <h1 class="text-primary p-5">{{ "LOGIN.TITLE" | translate }}</h1>
+    </div>
+
+    <img
+      src="../../../../assets/icons/signup.svg"
+      style="object-fit: contain; width: 80%"
+    />
+  </div>
+  <div class="col-6"> -->
+<!-- <img src="../../../../assets/icons/common.svg" class="img-thumbnail; posi" style="object-fit: contain; position:fixed"/> -->
+
+<!-- <div class="login-form">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h2 class="text-center">{{ "SIGNUP.SIGNUP" | translate }}</h2>
+
+        <div class="form-group">
+          <label for="companyname">{{
+            "SIGNUP.COMPANY_NAME" | translate
+          }}</label>
+          <input
+            type="text"
+            formControlName="companyname"
+            id="loginCompanyNameInput"
+            class="form-control"
+          />
+          <div
+            *ngIf="submitted && f.companyname.errors"
+            class="invalid-feedback"
+          >
+            <div class="error" *ngIf="f.companyname.errors.required">
+              company name is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">{{ "SIGNUP.EMAIL" | translate }}</label>
+          <input
+            type="email"
+            formControlName="email"
+            id="loginEmailInput"
+            class="form-control"
+          />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div class="error" *ngIf="f.email.errors.required"> -->
+<!-- email is required -->
+<!-- {{ "SIGNUP.ERROR_EMAIL" | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">password</label>
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control"
+            id="loginPasswordInput"
+          />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div class="error" *ngIf="f.password.errors.required"> -->
+<!-- password is requried -->
+<!-- {{ "SIGNUP.ERROR_PASSWORD" | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmpassword">
+            {{ "SIGNUP.CONFIRM_PASSWORD" | translate }}</label
+          >
+          <input
+            type="password"
+            formControlName="confirmpassword"
+            class="form-control"
+            id="loginConfirmPasswordInput"
+          />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div class="error" *ngIf="f.password.errors.required">
+              confrim password is requried
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button
+            [disabled]="loading"
+            id="loginLoginButton"
+            class="btn btn-primary btn-lg btn-block"
+          >
+            <span
+              *ngIf="loading"
+              class="spinner-border spinner-border-sm mr-1"
+            ></span>
+            {{ "SIGNUP.SIGNUP" | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>dasddsad
+</div> -->
+
+<div
+  class="container-fluid bg-blue d-flex align-items-center justify-content-center h-100"
+>
+  <div class="row container-fluid">
+    <div class="col d-flex align-items-center justify-content-center">
+      <div class="col-12 bg-white shadow-custom p-5">
+        <div class="h1">
+          {{ "LOGIN.TITLEONE" | translate }} <br />
+          {{ "LOGIN.TITLETWO" | translate }}
+        </div>
+        <img
+          class=""
+          src="../../../../assets/icons/lll.svg"
+          style="object-fit: contain; width: 80%"
+        />
+      </div>
+    </div>
+    <div class="col d-flex align-items-center justify-content-center">
+      <div class="col col-md-12 p-5">
+        <form
+          #signUpForm="ngForm"
+          class="col"
+          (ngSubmit)="signUpForm.form.valid && onSubmit(signUpForm)"
+        >
+          <div class="h3 text-white">Sign Up</div>
+          <div class="input-group my-4">
+            <span class="input-group-text" id="basic-addon1"
+              ><i
+                class="fa fa-user-circle-o"
+                aria-hidden="true"
+                style="color: #004f8e "
+              ></i
+            ></span>
+            <input
+              type="text"
+              name="Name"
+              [(ngModel)]="user.firstname"
+              id="SignupNAmeInput"
+              #userName="ngModel"
+              class="form-control"
+              required
+              [ngClass]="{
+                'is-invalid': signUpForm.submitted && userName.invalid
+              }" 
+              placeholder="Name"
+              aria-label="username"
+              aria-describedby="basic-addon1"
+              [customValidator]="validator_service.emptyString"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="signUpForm.submitted && userName.invalid"
+            >
+              <p style="color: red" *ngIf="userName.errors.required">
+                User name is required
+              </p>
+            </div>
+            <!-- <div
+              *ngIf="submitted && f.username.errors"
+              class="invalid-feedback"
+            >
+              <div class="error" *ngIf="f.username.errors.required">
+                name is required
+              </div>
+            </div> -->
+          </div>
+
+          <div class="input-group my-4">
+            <span class="input-group-text" id="basic-addon1"
+              ><i
+                class="fa fa-envelope"
+                aria-hidden="true"
+                style="color: #004f8e "
+              ></i
+            ></span>
+            <input
+              type="text"
+              name="email"
+              [(ngModel)]="user.email"
+              class="form-control"
+              id="SignupEmailInput"
+              placeholder="Email"
+              aria-describedby="Email"
+              aria-label="email"
+              aria-describedby="basic-addon1"
+              #email="ngModel"
+              [ngClass]="{
+                'is-invalid': signUpForm.submitted && email.invalid
+              }"
+              required
+              [customValidator]="validator_service.authemail"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="signUpForm.submitted && email.invalid"
+            >
+              <p style="color: red" *ngIf="email.errors.required">
+                Email is required
+              </p>
+            </div>
+            <!-- <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div class="error" *ngIf="f.email.errors.required">
+                {{ "SIGNUP.ERROR_EMAIL" | translate }}
+              </div>
+            </div> -->
+          </div>
+
+          <div class="input-group my-4">
+            <span class="input-group-text" id="basic-addon1"
+              ><i
+                class="fa fa-building"
+                aria-hidden="true"
+                style="color: #004f8e "
+              ></i
+            ></span>
+            <input
+              type="text"
+              id="SignupCompanyNameInput"
+              name="companyName"
+              [(ngModel)]="company_name"
+              #companyName="ngModel"
+              class="form-control"
+              x
+              placeholder="Company Name"
+              aria-label="companyname"
+              aria-describedby="basic-addon1"
+              [ngClass]="{
+                'is-invalid': signUpForm.submitted && companyName.invalid
+              }"
+              required
+              [customValidator]="validator_service.emptyString"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="signUpForm.submitted && companyName.invalid"
+            >
+              <p style="color: red" *ngIf="companyName.errors.required">
+                Company name is required
+              </p>
+            </div>
+            <!-- <div
+              *ngIf="submitted && f.companyname.errors"
+              class="invalid-feedback"
+            >
+              <div class="error" *ngIf="f.companyname.errors.required">
+                company name is required
+              </div>
+            </div> -->
+          </div>
+
+          <div class="input-group my-4">
+            <span class="input-group-text" id="basic-addon1"
+              ><i
+                class="fa fa-phone"
+                aria-hidden="true"
+                style="color: #004f8e "
+              ></i
+            ></span>
+            <input
+              type="text"
+              name="mobile"
+              class="form-control"
+              [(ngModel)]="user.mobile"
+              placeholder="Mobile Number"
+              id="SignupMobileNumberInput"
+              #mobile="ngModel"
+              aria-label="mobile"
+              aria-describedby="basic-addon1"
+              [ngClass]="{
+                'is-invalid': signUpForm.submitted && mobile.invalid
+              }"
+              required
+              [customValidator]="validator_service.mobileNumber"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="signUpForm.submitted && companyName.invalid"
+            >
+              <p style="color: red" *ngIf="companyName.errors.required">
+                Mobile number is Required
+              </p>
+            </div>
+            <!-- <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+              <div class="error" *ngIf="f.mobile.errors.required">
+                Mobile is required
+              </div>
+            </div> -->
+          </div>
+
+          <div class="input-group my-4">
+            <span class="input-group-text" id="basic-addon1"
+              ><i
+                class="fa fa-shield"
+                aria-hidden="true"
+                style="color: #004f8e "
+              ></i
+            ></span>
+            <input
+              [type]="hide_password ? 'password' : 'text'"
+              class="form-control"
+              placeholder="Password"
+              id="SignupPasswordInput"
+              name="password"
+              #password="ngModel"
+              [(ngModel)]="user.password"
+              aria-label="password"
+              aria-describedby="basic-addon1"
+              required
+              [ngClass]="{
+                'is-invalid': signUpForm.submitted && password.invalid
+              }"
+              [customValidator]="validator_service.formConfirmPassword"
+            />
+            <span class="hide-password-icon input-group-text" id="basic-addon1"
+              ><i
+                *ngIf="hide_password"
+                [ngClass]="{ 'highlight-password-icon': !hide_password }"
+                class="fa fa-eye-slash"
+                id="show_eye_one"
+                (mouseup)="showPassword(false)"
+                (mousedown)="showPassword(true)"
+                aria-hidden="true"
+                style="color: #004f8e "
+              ></i>
+
+              <i
+                *ngIf="!hide_password"
+                [ngClass]="{ 'highlight-password-icon': !hide_password }"
+                class="fa fa-eye fa-xs"
+                id="show_eye_one"
+                (mouseup)="showPassword(false)"
+                (mousedown)="showPassword(true)"
+                aria-hidden="true"
+                style="color: #004f8e "
+              ></i>
+            </span>
+            <div *ngIf="user.password != confirm_password"></div>
+            <div
+              class="invalid-feedback"
+              *ngIf="signUpForm.submitted && password.invalid"
+            >
+              <p style="color: red" *ngIf="password.errors.required">
+                Password is required
+              </p>
+            </div>
+          </div>
+
+          <div class="input-group my-4">
+            <span class="input-group-text" id="basic-addon1"
+              ><i
+                class="fa fa-shield"
+                aria-hidden="true"
+                style="color: #004f8e "
+              ></i
+            ></span>
+            <input
+              [type]="hide_confirm_password ? 'password' : 'text'"
+              class="form-control"
+              placeholder="Confirm Password"
+              name="confirmPassword"
+              id="SignupConfirmPasswordInput"
+              #confirmPassword="ngModel"
+              [(ngModel)]="confirm_password"
+              [ngClass]="{
+                'is-invalid': signUpForm.submitted && confirmPassword.invalid
+              }"
+              aria-label="confirm_password"
+              aria-describedby="basic-addon1"
+              [customValidator]="validator_service.formConfirmPassword"
+            />
+            <span class="hide-password-icon input-group-text" id="basic-addon2"
+              ><i
+                *ngIf="hide_confirm_password"
+                [ngClass]="{
+                  'highlight-password-icon': !hide_confirm_password
+                }"
+                class="fa fa-eye-slash"
+                id="show_eye_one"
+                (mouseup)="showConfirmPassword(false)"
+                (mousedown)="showConfirmPassword(true)"
+                aria-hidden="true"
+                style="color: #004f8e "
+              ></i>
+
+              <i
+                *ngIf="!hide_confirm_password"
+                [ngClass]="{
+                  'highlight-password-icon': !hide_confirm_password
+                }"
+                class="fa fa-eye fa-xs"
+                id="show_eye_two"
+                (mouseup)="showConfirmPassword(false)"
+                (mousedown)="showConfirmPassword(true)"
+                aria-hidden="true"
+                style="color: #004f8e "
+              ></i
+            ></span>
+            <div
+            class="invalid-feedback"
+            *ngIf="signUpForm.submitted && confirmPassword.invalid"
+          >
+            <p style="color: red" *ngIf="confirmPassword.errors.required">
+              Confirm password is Required
+            </p>
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="
+            signUpForm.submitted &&
+              confirmPassword.hasError('mismatch')
+            "
+          >
+            <p
+              style="color: red"
+              *ngIf="
+                confirmPassword.hasError('mismatch') &&
+                confirm_password != ''
+              "
+            >
+              Password mismatch
+            </p>
+          </div>
+            <!-- <div
+                *ngIf="submitted && f.password.errors"
+                class="invalid-feedback"
+              >
+                <div class="error" *ngIf="f.password.errors.required">
+                  confrim password is requried
+                </div>
+              </div> -->
+          </div>
+
+          <!-- <div class="col text-end h6">
+           
+            <button
+            id="loginsignupButton"
+            type="submit"
+            style="cursor: pointer"
+            class="btn  mx-3 btn-outline-info text-white"
+          >
+          Sign Up
+          </button>
+          </div> -->
+          <div class="row">
+            <div class="col h6">
+             
+              <a
+                class="text-white"
+                id="signuploginButton"
+                routerLink="/login"
+                style="cursor: pointer"
+              >
+                {{ "SIGNUP.BACKTOLOGIN" | translate }}
+              </a>
+            </div>
+            <div class="col text-end ">
+              <div class="form-group">
+                <button
+                  [disabled]="loading"
+                  id="signupButton"
+                  class="btn btn-outline-info text-white"
+                >
+                  <span
+                    *ngIf="loading"
+                    class="spinner-border spinner-border-sm mr-1"
+                  ></span>
+                  {{ "SIGNUP.SIGNUP" | translate }}
+                </button>
+              </div>
+            </div>
+            
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

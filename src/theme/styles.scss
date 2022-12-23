@@ -1,0 +1,20 @@
+/* bootstrap */
+@import "~bootstrap/scss/bootstrap";
+/* slickgrid */
+@import "./slickgrid-variables.scss";
+@import "@slickgrid-universal/common/dist/styles/sass/slickgrid-theme-bootstrap.scss";
+@import "~multiple-select-modified/src/multiple-select.css";
+/* others */
+@import "~font-awesome/css/font-awesome.css";
+@import "~flatpickr/dist/flatpickr.css";
+@import "~ngx-toastr/toastr";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+/* customization */
+@import "./custom-styles.scss";
+@import "./toastr.scss";
+
+/* customize */
+@import "./global.scss";
+
+@import "./button.scss";
+@import "./popup.scss";

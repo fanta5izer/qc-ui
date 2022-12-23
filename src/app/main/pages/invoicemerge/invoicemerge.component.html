@@ -1,0 +1,441 @@
+<form
+  #InvoiceMergeForm="ngForm"
+  class="h-100 d-flex flex-column"
+  (ngSubmit)="InvoiceMergeForm.form.valid && onSave(InvoiceMergeForm)"
+>
+  <div class="bg-blue px-3 py-1">
+    <div
+      class="col-lg-12 d-flex flex-row px-2 align-items-center border-bottom border-primary shadow-custom bg-white"
+    >
+      <p class="ps-3 h5 fw-bold" *ngIf="!isEdit">
+        {{ "INVOICEMERGE.CREATE_INVOICE" | translate }}
+      </p>
+      <p class="ps-3 h5 fw-bold" *ngIf="isEdit">
+        {{ "INVOICEMERGE.EDIT_INVOICE" | translate }}
+      </p>
+      <button
+        mat-mini-fab
+        data-toggle="tooltip"
+        (ngSubmit)="InvoiceMergeForm.form.valid && onSave(InvoiceMergeForm)"
+        title="Save"
+        id="ContactSaveButton"
+        class="m-3 ms-auto align-items-center px-4"
+        [disabled]="!InvoiceMergeForm.dirty"
+        [ngClass]="!InvoiceMergeForm.dirty ? 'disablebtn' : 'savebtn'"
+      >
+        {{ "Save" }}
+      </button>
+      <button
+        mat-mini-fab
+        data-toggle="tooltip"
+        (click)="onClickCancel()"
+        title="Cancel"
+        id="ContactCancelButton"
+        class="cancelbtn me-3 align-items-center px-4"
+      >
+        {{ "Cancel" }}
+      </button>
+    </div>
+  </div>
+
+  <div class="bg-blue flex-grow-1 px-3 pb-1" style="height: 0px">
+    <div class="bg-white shadow-custom h-100 overflow-auto">
+      <div
+        class="row p-1 mx-3 m-3 d-flex align-items-start justify-content-start"
+      >
+        <!-- Invoice details -->
+        <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-xs-12 px-1 py-1">
+          <div class="px-2 pt-1">
+            <div
+              class="title-border-radius fw-bold py-1 mb-1 ps-3 text-white"
+              style="background-color: #004f8e"
+            >
+              {{ "Invoice Information" }}
+            </div>
+          </div>
+          <div class="row px-2">
+            <div class="col-xs-12 col-md-6">
+              <!-- Bill No -->
+              <div class="py-1">
+                <label
+                  class="customfont customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Bill no" }}
+                  <span style="color: red">*</span>
+                </label>
+                <input
+                  name="billno"
+                  class="form-control"
+                  id="employeeMergeFirstNameInput"
+                  #billno="ngModel"
+                  aria-describedby="billno"
+                  required
+                  [ngClass]="{
+                    'is-invalid': InvoiceMergeForm.submitted && billno.invalid
+                  }"
+                  [(ngModel)]="invoice.billno"
+                  [customValidator]="validator_service.emptyString"
+                />
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="InvoiceMergeForm.submitted && billno.invalid"
+                >
+                  <p style="color: red" *ngIf="firstName.errors.required">
+                    bill no is required
+                  </p>
+                </div>
+              </div>
+              <!-- bill reference -->
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Bill Reference" }}
+                  <span style="color: red">*</span></label
+                >
+                <input
+                  name="billref"
+                  class="form-control"
+                  id="customerMergeMobileInput"
+                  aria-describedby="billref"
+                  required
+                  [ngClass]="{
+                    'is-invalid': InvoiceMergeForm.submitted && billref.invalid
+                  }"
+                  #billref="ngModel"
+                  [(ngModel)]="invoice.billref"
+                  [customValidator]="validator_service.emptyString"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="InvoiceMergeForm.submitted && billref.invalid"
+                >
+                  <p style="color: red" *ngIf="mobile.errors.required">
+                    Bill reference is required
+                  </p>
+                </div>
+              </div>
+
+              <!-- bill date -->
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Bill Date" }} <span style="color: red">*</span></label
+                >
+                <input
+                  name="billdate"
+                  type="date"
+                  class="form-control"
+                  id="employeeMergeNameInput"
+                  aria-describedby="billdate"
+                  required
+                  #billdate="ngModel"
+                  [(ngModel)]="invoice.billdate"
+                  [ngClass]="{
+                    'is-invalid': InvoiceMergeForm.submitted && billdate.invalid
+                  }"
+                  [customValidator]="validator_service.emptyString"
+                />
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="InvoiceMergeForm.submitted && billdate.invalid"
+                >
+                  <p style="color: red" *ngIf="billdate.errors.required">
+                    Bill Date is required
+                  </p>
+                </div>
+              </div>
+              <!-- amount -->
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Bill Amount" }} <span style="color: red">*</span></label
+                >
+
+                <input
+                  name="amount"
+                  class="form-control"
+                  type="number"
+                  min="0"
+                  id="employeeMergePincodeInput"
+                  aria-describedby="amount"
+                  #amount="ngModel"
+                  [ngClass]="{
+                    'is-invalid': InvoiceMergeForm.submitted && amount.invalid
+                  }"
+                  [(ngModel)]="invoice.amount"
+                  [customValidator]="validator_service.emptyString"
+                />
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="InvoiceMergeForm.submitted && amount.invalid"
+                >
+                  <p
+                    style="color: red"
+                    *ngIf="creditlreceivedamtimit.errors.required"
+                  >
+                    Amount is required
+                  </p>
+                </div>
+              </div>
+              <!-- receivable -->
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Received Amount" }}
+                  <span style="color: red">*</span></label
+                >
+
+                <input
+                  name="receivedamt"
+                  class="form-control"
+                  type="number"
+                  min="0"
+                  id="employeeMergePincodeInput"
+                  aria-describedby="receivedamt"
+                  #receivedamt="ngModel"
+                  [ngClass]="{
+                    'is-invalid':
+                      InvoiceMergeForm.submitted && receivedamt.invalid
+                  }"
+                  [(ngModel)]="invoice.receivable"
+                  [customValidator]="validator_service.emptyString"
+                />
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="InvoiceMergeForm.submitted && receivedamt.invalid"
+                >
+                  <p
+                    style="color: red"
+                    *ngIf="creditlreceivedamtimit.errors.required"
+                  >
+                    received amount is required
+                  </p>
+                </div>
+              </div>
+              <!-- duedays -->
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Due Days" }} <span style="color: red">*</span></label
+                >
+
+                <input
+                  name="duedays"
+                  class="form-control"
+                  type="number"
+                  min="0"
+                  id="employeeMergePincodeInput"
+                  aria-describedby="duedays"
+                  #duedays="ngModel"
+                  [ngClass]="{
+                    'is-invalid': InvoiceMergeForm.submitted && duedays.invalid
+                  }"
+                  [(ngModel)]="invoice.duedays"
+                  [customValidator]="validator_service.emptyString"
+                />
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="InvoiceMergeForm.submitted && duedays.invalid"
+                >
+                  <p
+                    style="color: red"
+                    *ngIf="creditlreceivedamtimit.errors.required"
+                  >
+                    Due Days is required
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+              <!-- customer -->
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Customer" }} <span style="color: red">*</span></label
+                >
+
+                <ng-select
+                  name="customer"
+                  id="customerMergeContactPersonInput"
+                  #customer="ngModel"
+                  aria-describedby="customer"
+                  required
+                  [items]="customer_list"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="invoice.customerid"
+                  [ngClass]="{
+                    'is-invalid': InvoiceMergeForm.submitted && customer.invalid
+                  }"
+                  [customValidator]="validator_service.emptyString"
+                ></ng-select>
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="InvoiceMergeForm.submitted && customer.invalid"
+                >
+                  <p style="color: red" *ngIf="customer.errors.required">
+                    customer is required
+                  </p>
+                </div>
+              </div>
+              <!-- salesman -->
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Salesman" }} <span style="color: red">*</span></label
+                >
+
+                <ng-select
+                  name="salesman"
+                  id="customerMergeContactPersonInput"
+                  #salesman="ngModel"
+                  aria-describedby="country"
+                  required
+                  [items]="salesman_list"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="invoice.salesmanid"
+                  [ngClass]="{
+                    'is-invalid': InvoiceMergeForm.submitted && salesman.invalid
+                  }"
+                  [customValidator]="validator_service.emptyString"
+                ></ng-select>
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="InvoiceMergeForm.submitted && salesman.invalid"
+                >
+                  <p style="color: red" *ngIf="salesman.errors.required">
+                    salesman is required
+                  </p>
+                </div>
+              </div>
+
+              <!-- route -->
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Route" }} <span style="color: red">*</span></label
+                >
+
+                <ng-select
+                  name="route"
+                  id="customerMergeContactPersonInput"
+                  #route="ngModel"
+                  aria-describedby="type"
+                  required
+                  [items]="route_ref"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="invoice.routeid"
+                  [ngClass]="{
+                    'is-invalid': InvoiceMergeForm.submitted && route.invalid
+                  }"
+                  [customValidator]="validator_service.emptyString"
+                ></ng-select>
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="InvoiceMergeForm.submitted && route.invalid"
+                >
+                  <p style="color: red" *ngIf="route.errors.required">
+                    route is required
+                  </p>
+                </div>
+              </div>
+
+              <!-- area -->
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Area" }} <span style="color: red">*</span></label
+                >
+
+                <ng-select
+                  name="area"
+                  id="customerMergeContactPersonInput"
+                  #area="ngModel"
+                  aria-describedby="area"
+                  required
+                  [items]="area_ref"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="invoice.areaid"
+                  [ngClass]="{
+                    'is-invalid': InvoiceMergeForm.submitted && area.invalid
+                  }"
+                  [customValidator]="validator_service.emptyString"
+                ></ng-select>
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="InvoiceMergeForm.submitted && area.invalid"
+                >
+                  <p style="color: red" *ngIf="area.errors.required">
+                    Area is required
+                  </p>
+                </div>
+              </div>
+
+              <!-- Productgrp -->
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Product Group" }}
+                  <span style="color: red">*</span></label
+                >
+
+                <ng-select
+                  name="productgrp"
+                  id="customerMergeContactPersonInput"
+                  #productgrp="ngModel"
+                  aria-describedby="type"
+                  required
+                  [items]="productgrp_ref"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="invoice.productgroupid"
+                  [ngClass]="{
+                    'is-invalid':
+                      InvoiceMergeForm.submitted && productgrp.invalid
+                  }"
+                  [customValidator]="validator_service.emptyString"
+                ></ng-select>
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="InvoiceMergeForm.submitted && productgrp.invalid"
+                >
+                  <p style="color: red" *ngIf="productgrp.errors.required">
+                    product group is required
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

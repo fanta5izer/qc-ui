@@ -1,0 +1,512 @@
+<form
+  #CustomerMergeForm="ngForm"
+  class="h-100 d-flex flex-column"
+  (ngSubmit)="CustomerMergeForm.form.valid && onSave(CustomerMergeForm)"
+>
+  <div class="bg-blue px-3 py-1">
+    <div
+      class="col-lg-12 d-flex flex-row px-2 align-items-center border-bottom border-primary shadow-custom bg-white"
+    >
+      <p class="ps-3 h5 fw-bold" *ngIf="!isEdit">
+        {{ "CUSTOMERMERGE.CREATE_CUSTOMER" | translate }}
+      </p>
+      <p class="ps-3 h5 fw-bold" *ngIf="isEdit">
+        {{ "CUSTOMERMERGE.EDIT_CUSTOMER" | translate }}
+      </p>
+      <button
+        mat-mini-fab
+        data-toggle="tooltip"
+        (ngSubmit)="CustomerMergeForm.form.valid && onSave(CustomerMergeForm)"
+        title="Save"
+        id="ContactSaveButton"
+        class="m-3 ms-auto align-items-center px-4"
+        [disabled]="!CustomerMergeForm.dirty"
+        [ngClass]="!CustomerMergeForm.dirty ? 'disablebtn' : 'savebtn'"
+      >
+        {{ "Save" }}
+      </button>
+      <button
+        mat-mini-fab
+        data-toggle="tooltip"
+        (click)="onClickCancel()"
+        title="Cancel"
+        id="ContactCancelButton"
+        class="cancelbtn me-3 align-items-center px-4"
+      >
+        {{ "Cancel" }}
+      </button>
+    </div>
+  </div>
+
+  <div class="bg-blue flex-grow-1 px-3 pb-1" style="height: 0px">
+    <div class="bg-white shadow-custom h-100 overflow-auto">
+      <div
+        class="row p-1 mx-3 m-3 d-flex align-items-start justify-content-start"
+      >
+        <!-- customer details -->
+        <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-xs-12 px-1 py-1">
+          <div class="px-2 pt-1">
+            <div
+              class="title-border-radius fw-bold py-1 mb-1 ps-3 text-white"
+              style="background-color: #004f8e"
+            >
+              {{ "Customer Information" }}
+            </div>
+          </div>
+          <div class="row px-2">
+            <div class="col-xs-12 col-md-6">
+              <!-- name -->
+              <div class="py-1">
+                <label
+                  class="customfont customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Name" }}
+                  <span style="color: red">*</span>
+                </label>
+                <input
+                  name="Name"
+                  class="form-control"
+                  id="employeeMergeFirstNameInput"
+                  #Name="ngModel"
+                  aria-describedby="Name"
+                  required
+                  [ngClass]="{
+                    'is-invalid': CustomerMergeForm.submitted && Name.invalid
+                  }"
+                  [(ngModel)]="customer.name"
+                  [customValidator]="validator_service.emptyString"
+                />
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="CustomerMergeForm.submitted && Name.invalid"
+                >
+                  {{ name && name.error }}
+                  <p style="color: red" *ngIf="name && name.errors.required">
+                    Name is required
+                  </p>
+                </div>
+              </div>
+              <!-- code -->
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Code" }} <span style="color: red">*</span></label
+                >
+
+                <input
+                  name="code"
+                  class="form-control"
+                  id="customerMergeMobileInput"
+                  aria-describedby="code"
+                  required
+                  [ngClass]="{
+                    'is-invalid': CustomerMergeForm.submitted && mobile.invalid
+                  }"
+                  #code="ngModel"
+                  [(ngModel)]="customer.code"
+                  [customValidator]="validator_service.emptyString"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="CustomerMergeForm.submitted && code.invalid"
+                >
+                  <p style="color: red" *ngIf="code.errors.required">
+                    code is required
+                  </p>
+                </div>
+              </div>
+              <!-- mobile -->
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Mobile" }}</label
+                >
+                <input
+                  name="mobile"
+                  maxlength="10"
+                  class="form-control"
+                  id="customerMergeMobileInput"
+                  aria-describedby="mobile"
+                  #mobile="ngModel"
+                  [(ngModel)]="customer.mobileno"
+                />
+              </div>
+              <!-- GST -->
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "GST NO" }}</label
+                >
+                <input
+                  name="GST NO"
+                  class="form-control"
+                  id="customerMergeFirstNameInput"
+                  #gst="ngModel"
+                  aria-describedby="gst"
+                  [(ngModel)]="customer.gstno"
+                />
+              </div>
+              <!-- email -->
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Email" }}</label
+                >
+                <input
+                  name="email"
+                  class="form-control"
+                  id="customerMergeEmailInput"
+                  aria-describedby="email"
+                  #email="ngModel"
+                  [(ngModel)]="customer.emailid"
+                />
+              </div>
+
+              <!-- address -->
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Address" }}</label
+                >
+                <textarea
+                  name="address"
+                  class="form-control"
+                  id="customerMergeAddressInput"
+                  aria-describedby="address"
+                  [(ngModel)]="customer.address"
+                  style="height: 90px"
+                  #address="ngModel"
+                >
+                </textarea>
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+              <!-- route -->
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Route" }}
+                  <span style="color: red">*</span>
+                </label>
+
+                <ng-select
+                  name="route"
+                  id="customerMergeRouteInput"
+                  #route="ngModel"
+                  aria-describedby="route"
+                  [items]="route_ref"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="customer.routeid"
+                  required
+                  [ngClass]="{
+                    'is-invalid': CustomerMergeForm.submitted && route.invalid
+                  }"
+                  [customValidator]="validator_service.emptyString"
+                ></ng-select>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="CustomerMergeForm.submitted && route.invalid"
+                >
+                  <p style="color: red" *ngIf="route.errors.required">
+                    route is required
+                  </p>
+                </div>
+              </div>
+
+              <!-- category -->
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Category" }}</label
+                >
+
+                <ng-select
+                  name="Category"
+                  id="customerMergeContactPersonInput"
+                  #Category="ngModel"
+                  aria-describedby="Category"
+                  [items]="Category_ref"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="customer.categoryid"
+                ></ng-select>
+              </div>
+              <!-- area -->
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Area" }}</label
+                >
+
+                <ng-select
+                  name="area"
+                  id="customerMergeContactPersonInput"
+                  #area="ngModel"
+                  aria-describedby="area"
+                  [items]="area_ref"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="customer.areaid"
+                ></ng-select>
+              </div>
+
+              <!-- city -->
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "City" }}</label
+                >
+
+                <ng-select
+                  name="city"
+                  id="customerMergeContactPersonInput"
+                  #city="ngModel"
+                  aria-describedby="type"
+                  [items]="city_ref"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="customer.cityid"
+                ></ng-select>
+              </div>
+
+              <!-- district -->
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "District" }}
+                </label>
+
+                <ng-select
+                  name="district"
+                  id="customerMergeContactPersonInput"
+                  #district="ngModel"
+                  aria-describedby="type"
+                  [items]="district_ref"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="customer.districtid"
+                ></ng-select>
+              </div>
+
+              <!-- state -->
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "State" }}
+                </label>
+
+                <ng-select
+                  name="state"
+                  id="customerMergeContactPersonInput"
+                  #state="ngModel"
+                  aria-describedby="type"
+                  [items]="state_ref"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="customer.stateid"
+                ></ng-select>
+              </div>
+
+              <!-- country -->
+              <!-- <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Country" }}
+                </label>
+
+                <ng-select
+                  name="country"
+                  id="customerMergeContactPersonInput"
+                  #country="ngModel"
+                  aria-describedby="country"
+                  [items]="country_ref"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="customer.countryid"
+                ></ng-select>
+              </div> -->
+
+              <!-- pincode -->
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Pincode" }}
+                </label>
+
+                <input
+                  name="pincode"
+                  class="form-control"
+                  id="employeeMergePincodeInput"
+                  aria-describedby="pincode"
+                  #pincode="ngModel"
+                  [(ngModel)]="customer.pincode"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- bank deatils -->
+        <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12 px-1 py-1">
+          <div class="col-xs-12 col-md-6">
+            <div class="px-2 pt-1">
+              <div
+                class="title-border-radius fw-bold py-1 mb-1 ps-3 text-white"
+                style="background-color: #004f8e"
+              >
+                {{ "Bank Details" | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="row px-2">
+            <div class="col-xs-12 col-md-6">
+              <!-- holdername  -->
+              <div class="py-1">
+                <label
+                  class="customfont customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Account Holder Name" }}
+                </label>
+                <input
+                  name="accountname"
+                  class="form-control"
+                  id="customerMergeFirstNameInput"
+                  #accountname="ngModel"
+                  aria-describedby="accountname"
+                  [(ngModel)]="customer.bankaccountname"
+                />
+              </div>
+              <!-- bank  name -->
+              <div class="py-1">
+                <label
+                  class="customfont customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Bank Name" }}
+                </label>
+                <input
+                  name="bankname"
+                  class="form-control"
+                  id="customerMergeFirstNameInput"
+                  #bankname="ngModel"
+                  aria-describedby="bankname"
+                  [(ngModel)]="customer.bankname"
+                />
+              </div>
+              <!-- account number -->
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Account Number" }}
+                </label>
+                <input
+                  name="accountno"
+                  maxlength="20"
+                  class="form-control"
+                  id="customerMergeMobileInput"
+                  aria-describedby="accountno"
+                  #accountno="ngModel"
+                  [(ngModel)]="customer.bankaccountno"
+                />
+              </div>
+              <!-- ifsc -->
+              <div class="py-1">
+                <label
+                  class="customfont customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "IFSC Code" }}
+                </label>
+                <input
+                  name="ifsc"
+                  class="form-control"
+                  id="customerMergeFirstNameInput"
+                  #ifsc="ngModel"
+                  aria-describedby="ifsc"
+                  [(ngModel)]="customer.bankifsc"
+                />
+              </div>
+
+              <!-- other deatils  -->
+              <!--  support credit  -->
+              <div class="py-1 pt-2">
+                <input
+                  class="m-3"
+                  type="checkbox"
+                  id="%"
+                  name="support_credit"
+                  [(ngModel)]="support_credit"
+                />
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Support Credit" }}</label
+                >
+              </div>
+
+              <!-- credit limit -->
+
+              <div class="py-1" *ngIf="support_credit">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Credit Limit" }}</label
+                >
+
+                <input
+                  name="creditlimit"
+                  class="form-control"
+                  type="number"
+                  min="0"
+                  id="employeeMergePincodeInput"
+                  aria-describedby="creditlimit"
+                  #creditlimit="ngModel"
+                  [(ngModel)]="customer.creditlimit"
+                />
+              </div>
+
+              <!-- credit days -->
+
+              <div class="py-1" *ngIf="support_credit">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Credit Days" }}
+                </label>
+
+                <input
+                  name="creditdays"
+                  class="form-control"
+                  type="number"
+                  min="0"
+                  id="employeeMergePincodeInput"
+                  aria-describedby="creditdays"
+                  #creditdays="ngModel"
+                  [(ngModel)]="customer.creditdays"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,49 @@
+<form #referencelistMergeForm="ngForm" class="h-100 d-flex flex-column">
+
+    <div class=" bg-blue">
+      <div class="d-flex flex-row align-items-center border-bottom border-primary shadow-custom my-1 mx-3 bg-white">
+        <p class="ps-5">{{ "Create Referencelist" }}</p>
+        <button mat-mini-fab data-toggle="tooltip" (click)="onSaveReferencelist(referencelistMergeForm)"
+          [title]="'GLOBAL.SAVE' | translate" id="ContactSaveButton" class="savebtn m-3 ms-auto align-items-center px-4">
+          {{ "GLOBAL.SAVE" | translate }}
+        </button>
+        <button mat-mini-fab data-toggle="tooltip" (click)="onClickCancel()" [title]="'GLOBAL.CANCEL' | translate"
+          id="ContactCancelButton" class="cancelbtn me-3 align-items-center px-4">
+          {{ "GLOBAL.CANCEL" | translate }}
+        </button>
+      </div>
+    </div>
+
+
+  <div class="flex-grow-1 overflow-auto container-fluid bg-blue">
+    <div class="ps-5 bg-white">
+      <div class="col-5">
+
+        <div class="col-md-6 pb-2">
+          <label class="mat-body-strong fw-bold py-1 ps-2" >{{ "Type"
+            }}</label>
+          <ng-select  [disabled]="true" name="type" id="employeeMergeContactPersonInput" #type="ngModel"
+            aria-describedby="type" required [items]="refrencetype_list" bindLabel="displaytext" bindValue="displaytext"
+            [(ngModel)]="referencelist.type"></ng-select>
+        </div>
+
+        <div class="col-md-6 pb-2">
+          <label class="mat-body-strong fw-bold py-1 ps-2">{{
+            "Name"
+            }}</label>
+          <input name="name" class="form-control"  id="referenceMergeMobileInput"
+            aria-describedby="name" required [(ngModel)]="referencelist.value" (ngModelChange)="onNameChange()" />
+        </div>
+
+        <div class="col-md-6 pb-2">
+          <label class="mat-body-strong fw-bold py-1 ps-2">{{
+            "Code" 
+            }}</label>
+          <input readonly name="code" class="form-control "  id="referenceMergeNameInput"
+            #code="ngModel" aria-describedby="code" required [(ngModel)]="referencelist.code" />
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>

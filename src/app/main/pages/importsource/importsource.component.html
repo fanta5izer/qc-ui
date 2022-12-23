@@ -1,0 +1,65 @@
+<div class="h-100 d-flex flex-column">
+  <div class="container-fluid no-gutter bg-blue py-3 px-0">
+    <div class="d-flex mx-3 p-3 shadow-custom bg-white">
+      <div class="flex-grow-1">
+        <h5>Import Source</h5>
+      </div>
+      <div class="">
+        <input
+          class="form-control ml-3"
+          type="file"
+          accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          (change)="onFileChange($event)"
+          accept=".xlsx, .xls, .csv"
+          id="contact-list-sheet"
+          #myFileInput
+          name="myfile"
+        />
+      </div>
+
+      <div class="">
+        <button
+          mat-mini-fab
+          data-toggle="tooltip"
+          [title]="'Reset'"
+          id="ContactResetButton"
+          (click)="myFileInput.value = ''; onClickReset()"
+          [disabled]="import_source_list_sheet.length == 0"
+          class="cancelbtn mx-3 px-3"
+        >
+          <span class="material-icons">Reset</span>
+        </button>
+      </div>
+
+      <div class="">
+        <button
+          class="createbtn px-2 border"
+          [disabled]="selected_source.length == 0"
+          aria-hidden="true"
+          data-toggle="tooltip"
+          [title]="'Upload Source'"
+          (click)="importDevices()"
+        >
+          <span class="fa fa-download" id="importsource"> </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="source-container" class="flex-grow-1 mx-3 mt-3">
+    <angular-slickgrid
+      gridId="Sourcegrid"
+      [columnDefinitions]="import_source_list_columnDefinitions"
+      [gridOptions]="import_source_list_gridOptions"
+      [dataset]="import_source_list_dataset"
+      (onSelectedRowsChanged)="handleSelectedRowsChanged($event)"
+      (sgOnCellChange)="
+        onImportSourceListGridCellChanged(
+          $event.detail.eventData,
+          $event.detail.args
+        )
+      "
+      (onAngularGridCreated)="ImportSourceListGridReady($event.detail)"
+    >
+    </angular-slickgrid>
+  </div>
+</div>

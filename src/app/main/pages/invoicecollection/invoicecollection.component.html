@@ -1,0 +1,117 @@
+<div class="h-100 d-flex">
+  <div class="d-flex flex-grow-1 gap-2 h-100">
+    <div class="col-md-5 p-3">
+      <div class="d-flex flex-column h-100 rounded shadow border">
+        <div class="d-flex col align-items-center m-3">
+          <div class="d-flex gap-3 col-7">
+            <ng-select
+              class="flex-fill"
+              name="route"
+              id="invoicecollection"
+              #route="ngModel"
+              aria-describedby="route"
+              [items]="routeList"
+              bindLabel="name"
+              bindValue="name"
+              [(ngModel)]="selectedRoute"
+              placeholder="Route"
+              (ngModelChange)="empCollectionFilter(selectedRoute)"
+            ></ng-select>
+
+            <ng-select
+              class="flex-fill"
+              name="customer"
+              id="invoicecustomerlistt"
+              #customer="ngModel"
+              aria-describedby="route"
+              [items]="customerList"
+              bindLabel="name"
+              bindValue="name"
+              [(ngModel)]="selectedCustomer"
+              placeholder="Customer"
+              (ngModelChange)="empCollectionFilter(selectedCustomer)"
+            ></ng-select>
+          </div>
+          <div class="d-flex gap-4 col-5 ps-5">
+            <input
+              class="form-control"
+              type="date"
+              [(ngModel)]="empCollectionReq.paidon"
+              (ngModelChange)="getStoreCollectionData()"
+            />
+            <!-- <button
+              data-toggle="tooltip"
+              id="searchEmpCollection"
+              class="createbtn border px-2"
+              [title]="'Search'"
+            >
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button> -->
+          </div>
+        </div>
+        <div id="store-grid-container" class="flex-grow-1 mx-3">
+          <angular-slickgrid
+            gridId="store-list-grid"
+            [columnDefinitions]="storeGridColumnDefinitions"
+            [gridOptions]="storeGridOptions"
+            [dataset]="storeGridDataset"
+          >
+          </angular-slickgrid>
+        </div>
+      </div>
+    </div>
+
+    <div class="col p-3">
+      <div class="d-flex flex-column h-100 rounded shadow border">
+        <div class="d-flex align-items-center my-3">
+          <div class="flex-grow-1 text-success mx-3">
+            <p *ngIf="collectedAmount > 0" class="fw-bold">
+              Collected Amount: ₹&nbsp;{{ collectedAmount }}
+            </p>
+          </div>
+          <div class="">
+            <button
+              *ngIf="invoiceGridDataset.length > 0"
+              mat-mini-fab
+              data-toggle="tooltip"
+              id="splitButton"
+              class="createbtn mx-3 align-items-center p-2 border"
+              [title]="'split'"
+              (click)="calculate()"
+            >
+              <span>
+                {{ SelectedRows ? "Update Selected Invoice" : "Split evently" }}
+              </span>
+            </button>
+            <button
+              *ngIf="invoiceGridDataset.length > 0"
+              mat-mini-fab
+              data-toggle="tooltip"
+              id="ContactAddButton"
+              class="createbtn mx-3 align-items-center p-2 border"
+              [title]="'Create Contact'"
+              (click)="updateInvoice()"
+            >
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
+              {{ "Update" }}
+            </button>
+          </div>
+        </div>
+
+        <div id="invoice-grid-container" class="flex-grow-1 mx-3">
+          <angular-slickgrid
+            gridId="invoice-list-grid"
+            [columnDefinitions]="invoiceGridColumnDefinitions"
+            [gridOptions]="invoiceGridOptions"
+            [dataset]="invoiceGridDataset"
+            (onSelectedRowsChanged)="
+              onSelectedInvoiceRowsChanged($event.detail)
+            "
+            (onAngularGridCreated)="invoiceGridReady($event.detail)"
+          >
+          </angular-slickgrid>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "GLOBAL": {
+    "FOOTER_COPYRIGHTS": "© 2021 StoreSoft",
+    "FOOTER_VERSION": "v1.1.1",
+    "SAVE": "SAVE",
+    "CANCEL": "CANCEL",
+    "EDIT_TT": "Edit",
+    "DELETE_TT": "Delete",
+    "CONVERT_DEAL_TT": "Conver to deal"
+  },
+  "HOME": {
+    "Lead": "lead",
+    "Deal": "Deal",
+    "Employee": "Employee"
+  },
+  "CONTACT": {
+    "NAME": "Name",
+    "COMPANY": "Company",
+    "PHONE": "Phone",
+    "ADDRESS": "Address",
+    "LOCATION": "Location",
+    "CREATE_CONTACTS": "Create Contacts"
+  },
+  "CONTACTMERGE": {
+    "CREATE_CONTACTS": "Create Contacts",
+    "CONTACT_INFORMATION": "Contact information",
+    "ADDRESS_INFORMATION": "Address information"
+  }
+}

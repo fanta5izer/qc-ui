@@ -1,0 +1,36 @@
+<div class="p-1 bg-blue shadow-custom">
+  <div class="modal-header bg-white">
+    <h4 class="modal-title">Choose Route</h4>
+  </div>
+  <div class="modal-body bg-white">
+    <ng-select
+      name="Route"
+      id="ng-selectpopoup"
+      #Route="ngModel"
+      aria-describedby="type"
+      required
+      [items]="route_ref"
+      bindLabel="name"
+      bindValue="id"
+      [multiple]="true"
+      [(ngModel)]="attr"
+    ></ng-select>
+  </div>
+  <div class="modal-footer bg-white">
+    <button
+      type="button"
+      class="savebtn cancelbtn me-3 align-items-center px-4"
+      (click)="closeModal()"
+    >
+      Cancel
+    </button>
+
+    <button
+      type="button"
+      class="savebtn me-3 align-items-center px-4"
+      (click)="goBack()"
+    >
+      Okay
+    </button>
+  </div>
+</div>

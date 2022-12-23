@@ -1,0 +1,18 @@
+{
+  "GLOBAL": {
+    "FOOTER_COPYRIGHTS":"© 2021 StoreSoft",
+    "FOOTER_VERSION":"v1.1.1"
+   
+   
+  },
+  "HOME":{
+    "Lead":"FR-Lead",
+    "Deal":"FR-Deal",
+    "Employee":"FR-Employee"
+  },
+  "CONTACT":{
+    "Name":"FR-Name"
+  }
+
+
+}

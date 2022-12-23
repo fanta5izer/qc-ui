@@ -1,0 +1,620 @@
+<form
+  #employeeMergeForm="ngForm"
+  class="h-100 d-flex flex-column"
+  (ngSubmit)="employeeMergeForm.form.valid && onSaveEmployee(employeeMergeForm)"
+>
+  <div class="bg-blue px-3 py-1">
+    <div
+      class="col-lg-12 d-flex flex-row px-2 align-items-center border-bottom border-primary shadow-custom bg-white"
+    >
+      <p class="ps-3 h5 fw-bold" *ngIf="!isEdit">
+        {{ "EMPLOYEEMERGE.CREATE_EMPLOYEE" | translate }}
+      </p>
+      <p class="ps-3 h5 fw-bold" *ngIf="isEdit">
+        {{ "EMPLOYEEMERGE.EDIT_EMPLOYEE" | translate }}
+      </p>
+      <button
+        mat-mini-fab
+        data-toggle="tooltip"
+        (ngSubmit)="
+          employeeMergeForm.form.valid && onSaveEmployee(employeeMergeForm)
+        "
+        title="Save"
+        id="ContactSaveButton"
+        class="m-3 ms-auto align-items-center px-4"
+        [disabled]="!employeeMergeForm.dirty"
+        [ngClass]="!employeeMergeForm.dirty ? 'disablebtn' : 'savebtn'"
+      >
+        {{ "Save" }}
+      </button>
+      <button
+        mat-mini-fab
+        data-toggle="tooltip"
+        (click)="onClickCancel()"
+        title="Cancel"
+        id="ContactCancelButton"
+        class="cancelbtn me-3 align-items-center px-4"
+      >
+        {{ "Cancel" }}
+      </button>
+    </div>
+  </div>
+
+  <div class="bg-blue flex-grow-1 px-3 pt-1 pb-3" style="height: 0px">
+    <div class="bg-white shadow-custom h-100 overflow-auto">
+      <div
+        class="row p-1 mx-3 m-3 d-flex align-items-start justify-content-start"
+      >
+        <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-xs-12 px-1 py-1">
+          <div class="px-2 pt-1">
+            <div
+              class="title-border-radius fw-bold py-1 mb-1 ps-3 text-white"
+              style="background-color: #004f8e"
+            >
+              {{ "Employee Information" }}
+            </div>
+          </div>
+          <div class="row px-2">
+            <div class="col-xs-12 col-md-6">
+              <div class="py-1">
+                <label
+                  class="customfont customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Name" }}
+                  <span style="color: red">*</span>
+                </label>
+                <input
+                  name="Name"
+                  class="form-control"
+                  id="employeeMergeFirstNameInput"
+                  #Name="ngModel"
+                  aria-describedby="Name"
+                  required
+                  [ngClass]="{
+                    'is-invalid': employeeMergeForm.submitted && Name.invalid
+                  }"
+                  [(ngModel)]="employee.name"
+                  [customValidator]="validator_service.emptyString"
+                />
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="employeeMergeForm.submitted && Name.invalid"
+                >
+                  <p style="color: red" *ngIf="firstName.errors.required">
+                    Name is required
+                  </p>
+                </div>
+              </div>
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Mobile" }}</label
+                >
+                <input
+                  name="mobile"
+                  maxlength="10"
+                  class="form-control"
+                  id="employeeMergeMobileInput"
+                  aria-describedby="mobile"
+                  #mobile="ngModel"
+                  [(ngModel)]="employee.mobileno"
+                />
+                <!-- <div
+                  class="invalid-feedback"
+                  *ngIf="employeeMergeForm.submitted && mobile.invalid"
+                >
+                  <p style="color: red" *ngIf="mobile.errors.required">
+                    Mobile number is required
+                  </p>
+                </div> -->
+              </div>
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Date of Brith" }}
+                </label>
+                <input
+                  name="dob"
+                  type="date"
+                  class="form-control"
+                  id="employeeMergeNameInput"
+                  aria-describedby="dob"
+                  #dob="ngModel"
+                  [(ngModel)]="employee.dateofbirth"
+                />
+
+                <!-- <div
+                  class="invalid-feedback"
+                  *ngIf="employeeMergeForm.submitted && dob.invalid"
+                >
+                  <p style="color: red" *ngIf="dob.errors.required">
+                    Mobile number is required
+                  </p>
+                </div> -->
+              </div>
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Address" }}
+                </label>
+                <textarea
+                  name="address"
+                  class="form-control"
+                  id="employeeMergeAddressInput"
+                  aria-describedby="address"
+                  [(ngModel)]="employee.address"
+                  style="height: 115px"
+                  #address="ngModel"
+                >
+                </textarea>
+                <!-- <div
+                  class="invalid-feedback"
+                  *ngIf="employeeMergeForm.submitted && address.invalid"
+                >
+                  <p style="color: red" *ngIf="address.errors.required">
+                    Address is required
+                  </p>
+                </div> -->
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Date of Joining" }}
+                </label>
+                <input
+                  name="doj"
+                  type="date"
+                  class="form-control"
+                  id="employeeMergeNameInput"
+                  aria-describedby="dob"
+                  #doj="ngModel"
+                  [(ngModel)]="employee.dateofjoining"
+                />
+                <!-- 
+                <div
+                  class="invalid-feedback"
+                  *ngIf="employeeMergeForm.submitted && doj.invalid"
+                >
+                  <p style="color: red" *ngIf="doj.errors.required">
+                    Joining Date is required
+                  </p>
+                </div> -->
+              </div>
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Route" }} <span style="color: red">*</span></label
+                >
+
+                <ng-select
+                  name="Route"
+                  id="route"
+                  #Route="ngModel"
+                  aria-describedby="Route"
+                  required
+                  [items]="route_ref"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="employee.routeid"
+                  [ngClass]="{
+                    'is-invalid': employeeMergeForm.submitted && Route.invalid
+                  }"
+                  [customValidator]="validator_service.emptyString"
+                ></ng-select>
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="employeeMergeForm.submitted && Route.invalid"
+                >
+                  <p style="color: red" *ngIf="Route.errors.required">
+                    Route is required
+                  </p>
+                </div>
+              </div>
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "City" }}
+                </label>
+
+                <ng-select
+                  name="city"
+                  id="employeeMergeContactPersonInput"
+                  #city="ngModel"
+                  aria-describedby="type"
+                  [items]="city_ref"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="employee.cityid"
+                ></ng-select>
+
+                <!-- <div
+                  class="invalid-feedback"
+                  *ngIf="employeeMergeForm.submitted && city.invalid"
+                >
+                  <p style="color: red" *ngIf="city.errors.required">
+                    City is required
+                  </p>
+                </div> -->
+              </div>
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Department" }}
+                </label>
+
+                <ng-select
+                  name="dept"
+                  id="employeeMergeContactPersonInput"
+                  #dept="ngModel"
+                  aria-describedby="type"
+                  [items]="dept_ref"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="employee.departmentid"
+                ></ng-select>
+
+                <!-- <div
+                  class="invalid-feedback"
+                  *ngIf="employeeMergeForm.submitted && dept.invalid"
+                >
+                  <p style="color: red" *ngIf="dept.errors.required">
+                    dept is required
+                  </p>
+                </div> -->
+              </div>
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Product Group" }}
+                </label>
+
+                <ng-select
+                  name="Productgrp"
+                  id="employeeMergeContactPersonInput"
+                  #Productgrp="ngModel"
+                  aria-describedby="type"
+                  [items]="productgrp_ref"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="employee.productgroupid"
+                ></ng-select>
+
+                <!-- <div
+                  class="invalid-feedback"
+                  *ngIf="employeeMergeForm.submitted && Productgrp.invalid"
+                >
+                  <p style="color: red" *ngIf="Productgrp.errors.required">
+                    Product Group is required
+                  </p>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12 px-1 py-1"
+          *ngIf="!isEdit"
+        >
+          <div class="col-xs-12 col-md-6">
+            <div class="px-2 pt-1">
+              <div
+                class="title-border-radius fw-bold py-1 mb-1 ps-3 text-white"
+                style="background-color: #004f8e"
+              >
+                {{ "EMPLOYEE.LOGIN_INFORMATION" | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="row px-2">
+            <div class="col-xs-12 col-md-6">
+              <div class="py-1">
+                <label
+                  class="customfont customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "Username" }}
+                </label>
+                <input
+                  name="username"
+                  class="form-control"
+                  id="employeeMergeFirstNameInput"
+                  #userName="ngModel"
+                  aria-describedby="username"
+                  [(ngModel)]="employee.loginusername"
+                />
+
+                <!-- <div
+                  class="invalid-feedback"
+                  *ngIf="employeeMergeForm.submitted && userName.invalid"
+                >
+                  <p style="color: red" *ngIf="firstName.errors.required">
+                    Username name is required
+                  </p>
+                </div> -->
+              </div>
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "EMPLOYEEMERGE.EMAIL" | translate }}
+                  <span style="color: red">*</span></label
+                >
+                <input
+                  name="email"
+                  class="form-control"
+                  id="employeeMergeEmailInput"
+                  aria-describedby="email"
+                  required
+                  #email="ngModel"
+                  [(ngModel)]="employee.emailid"
+                  [ngClass]="{
+                    'is-invalid': employeeMergeForm.submitted && email.invalid
+                  }"
+                  [customValidator]="validator_service.emptyString"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="employeeMergeForm.submitted && email.invalid"
+                ></div>
+              </div>
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "EMPLOYEEMERGE.ROLE" | translate }}
+                  <span style="color: red">*</span>
+                </label>
+
+                <ng-select
+                  name="role"
+                  id="employeeMergeContactPersonInput"
+                  #role="ngModel"
+                  aria-describedby="type"
+                  [items]="roleList"
+                  bindLabel="name"
+                  bindValue="id"
+                  [(ngModel)]="employee.roleid"
+                ></ng-select>
+
+                <!-- <div
+                  class="invalid-feedback"
+                  *ngIf="employeeMergeForm.submitted && role.invalid"
+                >
+                  <p style="color: red" *ngIf="role.errors.required">
+                    Role is required
+                  </p>
+                  <p style="color: red" *ngIf="role.invalid">
+                    User Role '{{ employee.role }}' already exist
+                  </p>
+                </div> -->
+              </div>
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "EMPLOYEEMERGE.PASSWORD" | translate }}
+                  <span style="color: red">*</span></label
+                >
+                <div class="input-group">
+                  <input
+                    name="password"
+                    [type]="hide_password ? 'password' : 'text'"
+                    data-toggle="password"
+                    class="form-control"
+                    id="employeeMergePasswordInput"
+                    #password="ngModel"
+                    aria-describedby="password"
+                    required
+                    [ngClass]="{
+                      'is-invalid':
+                        employeeMergeForm.submitted && password.invalid
+                    }"
+                    [(ngModel)]="employee.password"
+                  />
+                  <span
+                    class="hide-password-icon input-group-text"
+                    id="basic-addon1"
+                    ><i
+                      *ngIf="hide_password"
+                      [ngClass]="{ 'highlight-password-icon': !hide_password }"
+                      class="fa fa-eye-slash"
+                      id="show_eye_one"
+                      (mouseup)="showPassword(false)"
+                      (mousedown)="showPassword(true)"
+                      aria-hidden="true"
+                      style="color: #004f8e"
+                    ></i>
+
+                    <i
+                      *ngIf="!hide_password"
+                      [ngClass]="{ 'highlight-password-icon': !hide_password }"
+                      class="fa fa-eye fa-xs"
+                      id="show_eye_one"
+                      (mouseup)="showPassword(false)"
+                      (mousedown)="showPassword(true)"
+                      aria-hidden="true"
+                      style="color: #004f8e"
+                    ></i>
+                  </span>
+
+                  <div *ngIf="employee.password != confirm_password"></div>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="employeeMergeForm.submitted && password.invalid"
+                  >
+                    <p style="color: red" *ngIf="password.errors.required">
+                      Password is required
+                    </p>
+                  </div>
+
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      employeeMergeForm.submitted &&
+                      password.hasError('mismatch')
+                    "
+                  >
+                    <p style="color: red">Password mismatch</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="py-1">
+                <label
+                  class="customfont mat-body-strong fw-bold pb-1"
+                  style="color: #004f8e"
+                  >{{ "EMPLOYEEMERGE.CONFIRM" | translate }}
+                  <span style="color: red">*</span>
+                </label>
+                <div class="input-group">
+                  <input
+                    name="confirmPassword"
+                    [type]="hide_confirm_password ? 'password' : 'text'"
+                    class="form-control"
+                    id="employeeMergeConfirmPasswordInput"
+                    #confirmPassword="ngModel"
+                    aria-describedby="confirmPassword"
+                    required
+                    [ngClass]="{
+                      'is-invalid':
+                        employeeMergeForm.submitted && confirmPassword.invalid
+                    }"
+                    [(ngModel)]="confirm_password"
+                    [customValidator]="validator_service.formConfirmPassword"
+                  />
+                  <span
+                    class="hide-password-icon input-group-text"
+                    id="basic-addon2"
+                    ><i
+                      *ngIf="hide_confirm_password"
+                      [ngClass]="{
+                        'highlight-password-icon': !hide_confirm_password
+                      }"
+                      class="fa fa-eye-slash"
+                      id="show_eye_one"
+                      (mouseup)="showConfirmPassword(false)"
+                      (mousedown)="showConfirmPassword(true)"
+                      aria-hidden="true"
+                      style="color: #004f8e"
+                    ></i>
+
+                    <i
+                      *ngIf="!hide_confirm_password"
+                      [ngClass]="{
+                        'highlight-password-icon': !hide_confirm_password
+                      }"
+                      class="fa fa-eye fa-xs"
+                      id="show_eye_two"
+                      (mouseup)="showConfirmPassword(false)"
+                      (mousedown)="showConfirmPassword(true)"
+                      aria-hidden="true"
+                      style="color: #004f8e"
+                    ></i
+                  ></span>
+
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      employeeMergeForm.submitted && confirmPassword.invalid
+                    "
+                  >
+                    <p
+                      style="color: red"
+                      *ngIf="confirmPassword.errors.required"
+                    >
+                      Confirm password is required
+                    </p>
+                  </div>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      employeeMergeForm.submitted &&
+                      confirmPassword.hasError('mismatch')
+                    "
+                  >
+                    <div
+                      style="color: red"
+                      *ngIf="
+                        confirmPassword.hasError('mismatch') &&
+                        confirm_password != ''
+                      "
+                    >
+                      <div *ngIf="employee.password != confirm_password">
+                        Password mismatch
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- route -->
+        <div
+          class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12 px-1 py-1"
+          *ngIf="isEdit"
+        >
+          <div class="col-xs-12 col-md-12">
+            <div class="px-2 pt-1">
+              <div
+                class="title-border-radius fw-bold py-1 mb-1 ps-3 text-white"
+                style="background-color: #004f8e"
+              >
+                Route Information
+              </div>
+
+              <table
+                class="table table-bordered table-striped table-responsive"
+              >
+                <thead>
+                  <tr>
+                    <th>Days</th>
+                    <th>Route</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let plan of empplanAttributes; let i = index">
+                    <td *ngIf="DayList && DayList.length > 0">
+                      {{ DayList[i].code }} <span style="color: red">*</span>
+                    </td>
+                    <td>
+                      <ng-select
+                        name="routeplan{{ plan.dayid }}"
+                        id="routeplan{{ plan.dayid }}"
+                        required
+                        [items]="route_ref_plan"
+                        bindLabel="name"
+                        bindValue="id"
+                        [multiple]="true"
+                        [(ngModel)]="plan.routeidList"
+                      ></ng-select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

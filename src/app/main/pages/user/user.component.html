@@ -1,0 +1,28 @@
+<div class="h-100 d-flex flex-column px-3">
+
+  <div class="d-flex">
+    <button
+      mat-mini-fab
+        
+        (click)="goToUserMerge()"
+        data-toggle="tooltip"
+        id="ContactAddButton"
+        class="createbtn ms-auto m-3 align-items-center p-2"
+        [title]="'Create Contact'"
+      >
+      <i class="fa fa-user-plus" aria-hidden="true"></i>
+
+        {{ "USERMERGE.CREATE_USER" | translate }}
+      </button>
+  </div>
+
+  
+
+  <div id="user-grid1-container" class="flex-grow-1">
+    <angular-slickgrid gridId="user_list_grid1" [columnDefinitions]="user_list_columnDefinitions"
+      [gridOptions]="user_list_gridOptions" [dataset]="user_list_dataset">
+    </angular-slickgrid>
+  </div>
+
+
+</div>

@@ -1,0 +1,95 @@
+<!-- <div class="sidebar" [ngClass]="{ expanded: isExpanded }">
+    <div class="header">
+      <h1 class="title">deskbird</h1>
+      <div class="toggle" (click)="handleSidebarToggle()">
+        <span class="chevron"></span>
+      </div>
+    </div>
+    <div class="footer"></div>
+</div> -->
+
+<!-- <div class="row">
+    <div class = "col-3">
+    <div
+      *ngFor="let menu of menu_list"
+      class="px-4 py-1 mb-3 menu border"
+      [routerLink]="menu.link"
+      [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{ exact: false }"
+      data-bs-toggle="tooltip"
+      data-bs-placement="right"
+      [title]="menu.tooltip"
+    >
+      <a class="material-icons h4 border">{{ menu.name}}</a>
+   
+    </div></div>
+
+    <div class = "col-9">
+        <main-account></main-account>
+    </div>
+  </div> -->
+
+<form #settings="ngForm" class="container-fluid h-100">
+  <div class="row bg-blue h-100 px-2 pb-2">
+    <div class="col-md-2 p-2">
+      <div
+        class="col-md-12 bg-white h-100 shadow-custom pt-2 pb-0 d-flex flex-column"
+      >
+        <!-- <div class="d-flex flex-row align-items-center">
+          <div class="px-2 pt-2 pb-3 ">
+            <ngx-avatars name="{{ org.name }}"></ngx-avatars>
+    
+            
+            
+          </div>
+          <div class = "ps-2 text-end">{{ org.name }}</div>
+            <div class = "ps-2 text-end">{{ org.location }}</div>
+          
+        </div>
+         -->
+
+        <div class="row p-2 d-flex align-items-center justify-content-center">
+          <div class="col-3">
+            <ngx-avatars
+              bgColor="#FF9F29"
+              [name]="userData.firstname"
+            ></ngx-avatars>
+          </div>
+          <div class="col-8">
+            <span class="fw-bold" style="color: #004f8e">{{
+              userData.firstname
+            }}</span>
+            <div class="h6 text-muted">
+              {{ userData.lastname }}
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngFor="let menu of menu_list"
+          class="menu py-2 mt-2 text-end pe-3 bg-blue text-white"
+          [routerLink]="menu.link"
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: false }"
+          data-bs-toggle="tooltip"
+          data-bs-placement="right"
+          [title]="menu.tooltip"
+          [ngClass]="{
+            active: menu.active
+          }"
+        >
+          <p style="border: 10px" class="ps-2">
+            {{ menu.name }}
+          </p>
+        </div>
+
+        <button class="logoutbtn mx-5 mt-auto mb-3" (click)="logout()">
+          Log Out
+        </button>
+      </div>
+    </div>
+    <div class="col-10 ps-0">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</form>

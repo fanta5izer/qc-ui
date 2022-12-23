@@ -1,0 +1,91 @@
+<div class="container-fluid bg-blue">
+  <div class="d-flex align-items-center">
+    <div class="p-2">
+      <img src="assets/img/collectionlogo.png" alt="" srcset="" />
+      <!-- <span class="h6 text-white fw-bold ps-3"> Quanto Collection</span> -->
+    </div>
+    <div class="flex-grow-1 p-2">
+      <div class="d-flex mx-3 justify-content-center">
+        <!-- <div
+          routerLink="dashboard"
+          routerLinkActive="topnav"
+          class="mx-2 px-3 py-2 cursor-pointer"
+        >
+          <span class="h6 text-light">Dashboard</span>
+        </div> -->
+        <div
+          class="mx-2 px-3 py-2 cursor-pointer dropdown"
+          routerLinkActive="topnav"
+        >
+          <span class="h6 text-light">
+            Master&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
+          </span>
+          <div class="dropdown-content" style="text-align: left">
+            <a routerLink="referencelist" routerLinkActive="bg-hover"
+              >Reference</a
+            >
+            <!-- <a routerLink="sourcelist" routerLinkActive="bg-hover">Billing</a> -->
+            <a routerLink="employee" routerLinkActive="bg-hover">Employee</a>
+            <a routerLink="customer" routerLinkActive="bg-hover">Customer</a>
+            <a routerLink="schedule" routerLinkActive="bg-hover">Schedule</a>
+          </div>
+        </div>
+
+        <!-- <div
+          routerLink="employee"
+          routerLinkActive="topnav"
+          class="mx-2 px-3 py-2 cursor-pointer"
+        >
+          <span class="h6 text-light" id="main">Employee</span>
+        </div>
+        <div
+          routerLink="customer"
+          routerLinkActive="topnav"
+          class="mx-2 px-3 py-2 cursor-pointer"
+        >
+          <span class="h6 text-light">Customer</span>
+        </div> -->
+        <div
+          routerLink="sourcelist"
+          routerLinkActive="topnav"
+          class="mx-2 px-3 py-2 cursor-pointer"
+        >
+          <span class="h6 text-light">Billing</span>
+        </div>
+        <div
+          routerLink="invoice"
+          routerLinkActive="topnav"
+          class="mx-2 px-3 py-2 cursor-pointer"
+        >
+          <span class="h6 text-light">Invoice</span>
+        </div>
+        <!-- <div
+          routerLink="schedule"
+          routerLinkActive="topnav"
+          class="mx-2 px-3 py-2 cursor-pointer"
+        >
+          <span class="h6 text-light">Schedule</span>
+        </div> -->
+        <div
+          routerLink="invoicecollection"
+          routerLinkActive="topnav"
+          class="mx-2 px-4 py-2 cursor-pointer"
+        >
+          <span class="h6 text-light">Collection</span>
+        </div>
+      </div>
+    </div>
+    <div class="p-2">
+      <div
+        routerLink="settings"
+        routerLinkActive="bg-blue  rounded"
+        class="mx-2 px-3 py-2 cursor-pointer"
+      >
+        <ngx-avatars
+          bgColor="#FF9F29"
+          [name]="userData.firstname"
+        ></ngx-avatars>
+      </div>
+    </div>
+  </div>
+</div>

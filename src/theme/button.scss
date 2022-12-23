@@ -1,0 +1,181 @@
+.savebtn {
+    // width: 100%;
+    height: 35px;
+    color: #ffffff;
+    border: none;
+    font-family: inherit;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .savebtn:hover {
+    --_p: 0%;
+  }
+  
+  @keyframes active {
+    from {
+      transform: translateY(1px);
+    }
+  
+    to {
+      transform: translateY(2px);
+    }
+  }
+  
+  .savebtn:active {
+    animation: active 1s 1;
+    transition: all 0.1s;
+  }
+  
+  .savebtn{
+    background: linear-gradient(90deg, #004f8e  50%, #20b380 0)
+      var(--_p, 100%) / 200% no-repeat;
+    transition: 0.4s;
+  }
+  
+  .savebtn:hover {
+    color: #20b380;
+  }
+
+
+  .cancelbtn {
+    // width: 100%;
+    margin: auto 3px;
+    height: 35px;
+    color: #ffffff;
+    border: none;
+    font-family: inherit;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .cancelbtn:hover {
+    --_p: 0%;
+  }
+  
+  @keyframes active {
+    from {
+      transform: translateY(1px);
+    }
+  
+    to {
+      transform: translateY(2px);
+    }
+  }
+  
+  .cancelbtn:active {
+    animation: active 1s 1;
+    transition: all 0.1s;
+  }
+  
+  .cancelbtn {
+    background: linear-gradient(90deg, #004f8e  50%, #d23332 0)
+      var(--_p, 100%) / 200% no-repeat;
+    transition: 0.4s;
+  }
+  
+  .cancelbtn:hover {
+    color: #d23332;
+  }
+
+
+
+  .createbtn {
+    // width: 100%;
+    margin: auto 5px;
+    height: 40px;
+    color: #ffffff;
+    border: none;
+    font-family: inherit;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;  
+  }
+  
+  .createbtn:hover {
+    --_p: 0%;
+  }
+  
+  @keyframes active {
+    from {
+      transform: translateY(1px);
+    }
+  
+    to {
+      transform: translateY(2px);
+    }
+  }
+  
+  .createbtn:active {
+    animation: active 1s 1;
+    transition: all 0.1s;
+  }
+  
+  .createbtn {
+    background: linear-gradient(90deg, #004f8e  50%, white 0)
+      var(--_p, 100%) / 200% no-repeat;
+    transition: 0.4s;
+    color: #004f8e ;
+  }
+  
+  .createbtn:hover {
+    color: white;
+    
+  }
+
+
+  .customfont{
+    font-size: 15px
+  }
+
+  .disablebtn{
+    height: 35px;
+    color: #8c8c8c;
+    border-color:#8c8c8c  ;
+    font-family: inherit;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    
+  }
+
+
+
+  
+  
+//   .fancybtn:nth-last-of-type(2) {
+//     background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 50%, #d23332 0)
+//       var(--_p, 100%) / 200% no-repeat;
+//     transition: 0.4s;
+//   }
+  
+//   .fancybutton:nth-last-of-type(2):hover {
+//     color: #d23332;
+//   }
+  
+//   .fancybutton:nth-last-of-type(3) {
+//     background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 50%, #20b380 0)
+//       var(--_p, 100%) / 200% no-repeat;
+//     transition: 0.4s;
+//   }
+  
+//   .fancybutton:nth-last-of-type(3):hover {
+//     color: #20b380;
+//   }
+  
+//   .accept {
+//     background: linear-gradient(90deg, black 50%, #d23332 0) var(--_p, 100%) /
+//       200% no-repeat;
+//     transition: 0.4s;
+//   }
+  
+//   .accept:hover {
+//     color: #d23332;
+//   }
+ 

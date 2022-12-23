@@ -1,0 +1,142 @@
+{
+  "GLOBAL": {
+    "FOOTER_COPYRIGHTS": "© 2021 StoreSoft",
+    "FOOTER_VERSION": "v1.1.1",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "EDIT_TT": "Edit",
+    "DELETE_TT": "Delete",
+    "CONVERT_DEAL_TT": "Conver to deal"
+  },
+
+
+  "EMPLOYEE": {
+    "NAME": "Name",
+    "COMPANY": "Company",
+    "MOBILE": "Mobile number",
+    "SHOPNAME": "Shop name",
+    "DOB": "Dob",
+    "ADDRESS": "Address",
+    "DESIGNATION": "Designation",
+    "BLOODGROUP": "Blood group",
+    "CREATE_EMPLOYEE": "Create Employee",
+    "DELETE_SUCCESS": "Employee deleted successfully",
+    "DELETE_FAILURE": "Employee deleting Failed",
+    "EMPLOYEE_INFORMATION": " Employee information",
+    "LOGIN_INFORMATION": "Login information"
+  },
+
+
+  "SIGNUP": {
+    "SIGNUP": "Signup",
+    "ERROR_EMAIL": "enter email",
+    "ERROR_PASSWORD": " enter password",
+    "COMPANY_NAME": " Comapnay Name",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "CONFIRM_PASSWORD": "Confirm Password",
+    "BACKTOLOGIN": "Back To Login"
+  },
+  "LOGIN": {
+    "TITLEONE": "Welcome to Quanto Collection",
+    "TITLETWO": "",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "LOGIN": "Login",
+    "FORGOT": "Forgot Password?",
+    "SIGNUP": "Signup",
+    "NEWORGANIZATION": "New Organization ?"
+  },
+  "USER": {
+    "NAME": "Name",
+    "FIRSTNAME": "Firstname",
+    "LASTNAME": "Lastname",
+    "ROLE": "Role",
+    "USERNAME": "Username",
+    "MOBILE": "Mobile",
+    "EMAIL": "E-mail",
+    "COMPANY": "Company",
+    "ADDRESS": "Address",
+
+    "LOCATION": "Area/Location",
+
+    "CREATE_USER": "Create User",
+    "DELETE_SUCCESS": "User deleted successfully"
+  },
+  "USERMERGE": {
+
+    "CREATE_USER": "Create User",
+    "EDIT_USER": "Edit User",
+    "USER_INFORMATION": "User information",
+    "ADDRESS_INFORMATION": "Address information",
+    "FIRSTNAME": "First name",
+    "LASTNAME": "Last name",
+    "ROLE": "Role",
+    "USERNAME": "User name",
+    "MOBILE": "Mobile",
+    "PASSWORD": "Password",
+    "CONFIRM": " Confirm Password",
+    "EMAIL": "E-mail",
+    "SAVE_SUCCESS": "User saved successfully",
+    "UPDATE_SUCCESS": "User updated successfully",
+    "DELETE_SUCCESS": "User deleted successfully",
+    "DELETE_FAILURE": "User deleting Failed"
+  },
+  "EMPLOYEEMERGE": {
+    "CREATE_EMPLOYEE": "Create employee",
+    "EDIT_EMPLOYEE": "Edit employee",
+    "ALLOWLOGIN": "Allow Employee to Login",
+    "FIRSTNAME": "First name",
+    "LASTNAME": "Last name",
+    "EMAIL": "E-mail",
+    "DOB": "DOB",
+    "ROLE": "Role",
+    "MOBILE": "Mobile number",
+    "DESIGNATION": "Designation",
+    "BLOODGROUP": "Blood group",
+    "ADDRESS": "Address",
+    "DELETE_SUCCESS": "Employee deleted successfully",
+    "PINCODE": "Pincode",
+    "LANDMARK": "Landmark",
+    "DESCRIPTION": "Description",
+    "SAVE_SUCCESS": "Employee saved successfully",
+    "UPDATE_SUCCESS": "Employee updated successfully",
+    "SAVE_FAILURE": "Failed",
+    "PASSWORD": "Password",
+    "CONFIRM": " Confirm Password",
+    "JOININGDATE": "Joining Date",
+    "GENDER": "Gender"
+  },
+
+  "CUSTOMERMERGE": {
+    "CREATE_CUSTOMER": "Create customer",
+    "EDIT_CUSTOMER": "Edit customer",
+    "SAVE_SUCCESS": "customer saved successfully",
+    "UPDATE_SUCCESS": "customer updated successfully",
+    "DELETE_SUCCESS": "customer deleted successfully",
+    "DELETE_FAILURE": "customer deleting Failed"
+  },
+  "INVOICEMERGE": {
+    "CREATE_INVOICE": "Create Invoice",
+    "EDIT_INVOICE": "Edit Invoice",
+    "SAVE_SUCCESS": "Invoice saved successfully",
+    "UPDATE_SUCCESS": "Invoice updated successfully",
+    "DELETE_SUCCESS": "Invoice deleted successfully",
+    "DELETE_FAILURE": "Invoice deleting Failed"
+  },
+
+
+  "ACCOUNT": {
+    "EMAIL": "E-mail",
+    "NO_OF_USERS": "No of Users",
+    "NO_OF_EMPLOYEE": "No of Employee",
+    "GST": "GST",
+    "MOBILE": "Moblie",
+    "ADDRESS": "Address",
+    "LOCATION": "Area/Location",
+    "CITY": "City",
+    "NFORMATION": "Acount Information"
+  }
+
+
+}

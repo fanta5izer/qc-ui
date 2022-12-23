@@ -1,0 +1,83 @@
+<div class="h-100 d-flex flex-column px-3">
+  <div class="d-flex">
+    <div class="d-flex ms-auto my-3 align-items-center">
+      <button
+        *ngIf="readyToUpload"
+        mat-mini-fab
+        (click)="UploadInvoice()"
+        data-toggle="tooltip"
+        [title]="'Upload Invoice'"
+        id="ContactDeleteButton"
+        class="savebtn align-items-center p-2"
+      >
+        <span class="material-icons">Upload</span>
+      </button>
+      <!-- <input
+        (change)="selectDate()"
+        name="dob"
+        type="date"
+        class="form-control p-2 mx-2"
+        id="employeeMergeNameInput"
+        aria-describedby="dob"
+        required
+        #dob="ngModel"
+        [(ngModel)]="selectedDate"
+      /> -->
+      <!-- <button
+        mat-mini-fab
+        (click)="goToImportSource()"
+        data-toggle="tooltip"
+        id="importInvoice"
+        class="createbtn align-items-center p-2 border"
+        [title]="'Upload Invoice'"
+      >
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        <span>Import</span>
+        {{ "Import Invoice" }} 
+      </button> -->
+      <!-- <button class="createbtn px-2 border">
+        <span
+          class="fa fa-download"
+          aria-hidden="true"
+          data-toggle="tooltip"
+          [title]="'Upload Invoice'"
+          id="importInvoice"
+          (click)="goToImportSource()"
+        >
+        </span>
+      </button> -->
+      <button
+        mat-mini-fab
+        (click)="goToImportSource()"
+        data-toggle="tooltip"
+        id="importSource"
+        class="createbtn p-2 border"
+        [title]="'Import Source'"
+      >
+        Import
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="sourcelist-grid1-container"
+    class="flex-grow-1"
+    *ngIf="source_list_dataset.length > 0"
+  >
+    <angular-slickgrid
+      gridId="sourcelist-grid1"
+      [columnDefinitions]="source_list_columnDefinitions"
+      [gridOptions]="source_list_gridOptions"
+      [dataset]="source_list_dataset"
+      (onSelectedRowsChanged)="handleSelectedRowsChanged($event)"
+      (sgOnCellChange)="
+        onContactListGridCellChanged(
+          $event.detail.eventData,
+          $event.detail.args
+        )
+      "
+      (onAngularGridCreated)="contactListGridReady($event.detail)"
+    >
+    </angular-slickgrid>
+  </div>
+</div>

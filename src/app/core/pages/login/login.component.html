@@ -1,0 +1,162 @@
+
+<div
+  class="container-fluid bg-blue d-flex align-items-center justify-content-center h-100"
+>
+  <div class="row container-fluid">
+    <div class="col d-flex align-items-center justify-content-center">
+      <div class="col-12 bg-white shadow-custom p-5">
+        <div class="h1">
+          {{ "LOGIN.TITLEONE" | translate }} <br />
+          {{ "LOGIN.TITLETWO" | translate }}
+        </div>
+        <!-- <img
+          class=""
+          src="../../../../assets/img/login/login.svg"
+          style="object-fit: contain; width: 80%"
+        /> -->
+      </div>
+    </div>
+    <div class="col d-flex align-items-center justify-content-center">
+      <div class="col col-md-12 p-5">
+        <form
+          #loginForm="ngForm"
+          class="col"
+          (ngSubmit)="loginForm.form.valid && onSubmit(loginForm)"
+        >
+          <div class="h3 text-white">Login</div>
+          <div class="input-group my-4">
+            <span class="input-group-text" id="basic-addon1"
+              ><i
+                class="fa fa-envelope"
+                aria-hidden="true"
+                style="color: #004f8e "
+              ></i
+            ></span>
+            <input
+              type="text"
+              name="email"
+              required
+              [(ngModel)]="login.email"
+              class="form-control"
+              id="SignupEmailInput"
+              placeholder="Email"
+              aria-describedby="Email"
+              aria-label="email"
+              aria-describedby="basic-addon1"
+              #email="ngModel"
+              [ngClass]="{
+                'is-invalid': loginForm.submitted && email.invalid
+              }"
+              [customValidator]="validator_service.authemail"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="loginForm.submitted && email.invalid"
+            >
+              <p style="color: red" *ngIf="email.errors.required">
+                Email is required
+              </p>
+              <p style="color: red" *ngIf="email.invalid && login.email != ''">
+                Invalid Email format
+              </p>
+            </div>
+          </div>
+          <div class="input-group my-4">
+            <span class="input-group-text" id="basic-addon1"
+              ><i
+                class="fa fa-shield"
+                aria-hidden="true"
+                style="color: #004f8e "
+              ></i
+            ></span>
+            <input
+              [type]="hide_password ? 'password' : 'text'"
+              class="form-control"
+              placeholder="Password"
+              id="LoginPasswordInput"
+              name="password"
+              #password="ngModel"
+              [(ngModel)]="login.password"
+              aria-label="password"
+              aria-describedby="basic-addon1"
+              required
+              [ngClass]="{
+                'is-invalid': loginForm.submitted && password.invalid
+              }"
+              [customValidator]="validator_service.emptyString"
+            />
+            <span class="hide-password-icon input-group-text" id="basic-addon1"
+              ><i
+                *ngIf="hide_password"
+                [ngClass]="{ 'highlight-password-icon': !hide_password }"
+                class="fa fa-eye-slash"
+                id="show_eye_one"
+                (mouseup)="showPassword(false)"
+                (mousedown)="showPassword(true)"
+                aria-hidden="true"
+                style="color: #004f8e "
+              ></i>
+
+              <i
+                *ngIf="!hide_password"
+                [ngClass]="{ 'highlight-password-icon': !hide_password }"
+                class="fa fa-eye fa-xs"
+                id="show_eye_one"
+                (mouseup)="showPassword(false)"
+                (mousedown)="showPassword(true)"
+                aria-hidden="true"
+                style="color: #004f8e "
+              ></i>
+            </span>
+            <div
+              class="invalid-feedback"
+              *ngIf="loginForm.submitted && password.invalid"
+            >
+              <p style="color: red" *ngIf="password.errors.required">
+                Password is required
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <button
+                  [disabled]="loading"
+                  id="loginLoginButton"
+                  class="btn btn-outline-info text-white"
+                >
+                  <span
+                    *ngIf="loading"
+                    class="spinner-border spinner-border-sm mr-1"
+                  ></span>
+                  {{ "LOGIN.LOGIN" | translate }}
+                </button>
+              </div>
+              <div class="pt-2">
+                <a
+                  class="text-white"
+                  id="loginForgotPasswordButton"
+                  routerLink="/forgotpassword"
+                  style="cursor: pointer"
+                >
+                  {{ "LOGIN.FORGOT" | translate }}
+                </a>
+              </div>
+            </div>
+            <!-- <div class="col text-end h6">
+              
+              <a
+                class="text-white"
+                id="loginsignupButton"
+                routerLink="/signup"
+                style="cursor: pointer"
+              >
+                {{ "LOGIN.NEWORGANIZATION" | translate }}
+              </a>
+            </div> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

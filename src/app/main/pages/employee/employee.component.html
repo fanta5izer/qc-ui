@@ -1,0 +1,69 @@
+<div class="h-100 d-flex flex-column px-3">
+  <div class="d-flex my-3">
+    <div class="d-flex ms-auto align-items-center">
+      <button
+        *ngIf="selected_employees.length > 0"
+        mat-mini-fab
+        (click)="onBulkDelete()"
+        data-toggle="tooltip"
+        [title]="'Delete Contact'"
+        id="ContactDeleteButton"
+        class="btn btn-danger mx-2 align-items-center p-2"
+      >
+        <span class="material-icons">delete</span>
+      </button>
+      <!-- <button
+        mat-mini-fab
+        (click)="goToEmployeeMerge()"
+        data-toggle="tooltip"
+        [title]="'Create Contact'"
+        id="ContactAddButton"
+        class="btn success m-3 align-items-center p-2"
+      >
+        <mat-icon svgIcon="create-user" class="custom-icon"></mat-icon>
+        {{ "EMPLOYEE.CREATE_EMPLOYEE" | translate }}
+      </button> -->
+      <button
+        mat-mini-fab
+        (click)="goImportEmployee()"
+        data-toggle="tooltip"
+        id="ContactAddButton"
+        class="createbtn align-items-center p-2 border"
+        [title]="'Import Employee'"
+      >
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        {{ "Import Employee" }}
+      </button>
+      <button
+        mat-mini-fab
+        (click)="goToEmployeeMerge()"
+        data-toggle="tooltip"
+        id="ContactAddButton"
+        class="createbtn align-items-center p-2 border"
+        [title]="'Create Contact'"
+      >
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+
+        {{ "EMPLOYEE.CREATE_EMPLOYEE" | translate }}
+      </button>
+    </div>
+  </div>
+
+  <div id="employee-grid1-container" class="flex-grow-1">
+    <angular-slickgrid
+      gridId="employee_list_grid1"
+      [columnDefinitions]="employee_list_columnDefinitions"
+      [gridOptions]="employee_list_gridOptions"
+      [dataset]="employee_list_dataset"
+      (onSelectedRowsChanged)="handleSelectedRowsChanged($event)"
+      (sgOnCellChange)="
+        onContactListGridCellChanged(
+          $event.detail.eventData,
+          $event.detail.args
+        )
+      "
+      (onAngularGridCreated)="contactListGridReady($event.detail)"
+    >
+    </angular-slickgrid>
+  </div>
+</div>

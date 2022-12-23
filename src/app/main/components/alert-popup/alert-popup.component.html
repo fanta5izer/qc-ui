@@ -1,0 +1,25 @@
+<div class="p-1 bg-blue shadow-custom">
+  <div class="modal-header bg-white">
+    <h4 class="modal-title">CRM Alert!</h4>
+  </div>
+  <div class="modal-body bg-white">
+    <p>Screen not saved. Do you wish to proceed?</p>
+  </div>
+  <div class="modal-footer bg-white">
+    <button
+      type="button"
+      class="savebtn me-3 align-items-center px-4"
+      (click)="closeModal()"
+    >
+      Cancel
+    </button>
+
+    <button
+      type="button"
+      class="cancelbtn me-3 align-items-center px-4"
+      (click)="goBack()"
+    >
+      Okay
+    </button>
+  </div>
+</div>
