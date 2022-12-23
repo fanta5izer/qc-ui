@@ -5,7 +5,7 @@ name: qc-ui
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "host" ]
 
 jobs:
   build:
